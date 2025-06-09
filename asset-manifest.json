@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aavrar/interactive-story.git/static/css/main.b051d462.css",
-    "main.js": "/aavrar/interactive-story.git/static/js/main.965f6699.js",
-    "static/js/453.be401cf4.chunk.js": "/aavrar/interactive-story.git/static/js/453.be401cf4.chunk.js",
-    "index.html": "/aavrar/interactive-story.git/index.html",
-    "main.b051d462.css.map": "/aavrar/interactive-story.git/static/css/main.b051d462.css.map",
-    "main.965f6699.js.map": "/aavrar/interactive-story.git/static/js/main.965f6699.js.map",
-    "453.be401cf4.chunk.js.map": "/aavrar/interactive-story.git/static/js/453.be401cf4.chunk.js.map"
+    "main.css": "/interactive-story/static/css/main.b051d462.css",
+    "main.js": "/interactive-story/static/js/main.1b8a8f95.js",
+    "static/js/453.be401cf4.chunk.js": "/interactive-story/static/js/453.be401cf4.chunk.js",
+    "index.html": "/interactive-story/index.html",
+    "main.b051d462.css.map": "/interactive-story/static/css/main.b051d462.css.map",
+    "main.1b8a8f95.js.map": "/interactive-story/static/js/main.1b8a8f95.js.map",
+    "453.be401cf4.chunk.js.map": "/interactive-story/static/js/453.be401cf4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b051d462.css",
-    "static/js/main.965f6699.js"
+    "static/js/main.1b8a8f95.js"
   ]
 }
