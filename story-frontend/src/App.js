@@ -14,7 +14,7 @@ function App() {
 
   const fetchScene = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/scene'); // Assuming your FastAPI server is running on port 8000
+      const response = await axios.get('https://interactive-story-o8z0.onrender.com/scene'); // Assuming your FastAPI server is running on port 8000
       setScene(response.data);
       setError(''); // Clear any previous errors
     } catch (error) {
@@ -30,7 +30,7 @@ function App() {
   const handleCommandSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/command', { command });
+      const response = await axios.post('https://interactive-story-o8z0.onrender.com/command', { command });
       setScene(response.data);
       setMessage(response.data.message || '');
       setCommand('');
