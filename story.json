@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "title": "The Dark Forest Adventure Template",
+    "author": "Aahad",
+    "version": "0.1"
+  },
+  "scenes": [
+    {
+      "id": "start",
+      "descriptions": [
+        {
+          "text": "You are standing at the edge of a dark forest. A dirt path leads north, and you see a rusty sword and a potion lying on the ground."
+        },
+        {
+          "text": "You are standing at the edge of a dark forest. You see a dirt path leading north and a potion.",
+          "condition": "sword_taken"
+        }
+      ],
+      "items": [
+        {
+          "name": "sword",
+          "description": "A rusty, but still usable, sword.",
+          "properties": {
+            "damage": 5
+          },
+          "flags": []
+        },
+        {
+          "name": "potion",
+          "description": "A small healing potion.",
+          "properties": {
+            "heal": 10
+          },
+          "flags": []
+        }
+      ],
+      "choices": [
+        {
+          "action": "go north",
+          "next_scene": "forest_path"
+        },
+        {
+          "action": "take sword",
+          "next_scene": "start",
+          "set_flag": "sword_taken"
+        },
+        {
+          "action": "take potion",
+          "next_scene": "start"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "forest_path",
+      "descriptions": [
+        {
+          "text": "You are on a narrow path winding through the forest. The trees are tall and the air is still. You can hear the sound of running water to the east. There is a key on the ground."
+        },
+        {
+          "text": "You are on a narrow path winding through the forest. The trees are tall and the air is still. You can hear the sound of running water to the east.",
+          "condition": "not key_taken"
+        },
+        {
+          "text": "You are on a narrow path winding through the forest. The trees are tall and the air is still. You can hear the sound of running water to the east. You remember picking up a key here.",
+          "condition": "key_taken"
+        }
+      ],
+      "items": [
+        {
+          "name": "key",
+          "description": "A small, ornate key.",
+          "properties": {},
+          "flags": [
+            "key_found"
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "action": "go south",
+          "next_scene": "start"
+        },
+        {
+          "action": "go east",
+          "next_scene": "river_bank"
+        },
+        {
+          "action": "take key",
+          "next_scene": "forest_path",
+          "add_inventory": "key",
+          "set_flag": "key_taken"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "river_bank",
+      "descriptions": [
+        {
+          "text": "You are standing on the bank of a small river. The water looks clean and refreshing. You can see a small cave entrance on the other side."
+        }
+      ],
+      "items": [],
+      "choices": [
+        {
+          "action": "go west",
+          "next_scene": "forest_path"
+        },
+        {
+          "action": "enter cave",
+          "next_scene": "cave_entrance"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "cave_entrance",
+      "descriptions": [
+        {
+          "text": "You are at the entrance to a dark cave. A faint light flickers from within."
+        }
+      ],
+      "items": [],
+      "choices": [
+        {
+          "action": "go back",
+          "next_scene": "river_bank"
+        },
+        {
+          "action": "enter cave",
+          "next_scene": "inside_cave"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "inside_cave",
+      "descriptions": [
+        {
+          "text": "You are inside the cave. It's damp and cold. In the dim light, you can see a chest."
+        }
+      ],
+      "items": [],
+      "choices": [
+        {
+          "action": "go back",
+          "next_scene": "cave_entrance"
+        },
+        {
+          "action": "open chest",
+          "next_scene": "chest_open",
+          "set_flag": "chest_opened"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "chest_open",
+      "descriptions": [
+        {
+          "text": "You opened the chest and found a golden key!"
+        }
+      ],
+      "items": [],
+      "choices": [],
+      "flags": [
+        "chest_opened"
+      ]
+    },
+    {
+      "id": "9",
+      "descriptions": [
+        {
+          "text": "Past the cave you are in a clearing."
+        }
+      ],
+      "items": [],
+      "choices": [],
+      "flags": []
+    }
+  ]
+}

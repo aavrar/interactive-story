@@ -1,0 +1,13 @@
+{
+  "location": "river_bank",
+  "inventory": {
+    "sword": {
+      "damage": 5
+    },
+    "potion": {
+      "heal": 10
+    },
+    "key": {}
+  },
+  "flags": []
+}

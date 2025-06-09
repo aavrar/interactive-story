@@ -1,0 +1,9 @@
+{
+  "location": "forest_path",
+  "inventory": {
+    "sword": {
+      "damage": 5
+    }
+  },
+  "flags": []
+}
