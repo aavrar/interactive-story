@@ -1,6 +1,4 @@
 import uvicorn
-from api import app
-from cli import run_cli
 import argparse
 
 if __name__ == "__main__":
@@ -10,6 +8,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.mode == "api":
-        uvicorn.run(app, host="0.0.0.0", port=8000)
+        uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
     elif args.mode == "cli":
+        from cli import run_cli
         run_cli(args.save_file)

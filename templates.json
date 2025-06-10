@@ -1,0 +1,360 @@
+{
+    "locations": {
+      "forest_clearing": {
+        "name": "Forest Clearing",
+        "description": "A peaceful clearing surrounded by tall ancient trees. Sunlight filters through the canopy above, creating dancing patterns on the forest floor. A gentle breeze carries the scent of pine and wildflowers.",
+        "connections": {
+          "north": "dark_cave",
+          "east": "mountain_path",
+          "south": "village_outskirts",
+          "west": "hidden_grove"
+        },
+        "items": ["rusty_key", "healing_herbs"],
+        "npcs": ["forest_guardian"],
+        "discovery_chance": 0.3,
+        "danger_level": 1
+      },
+      "dark_cave": {
+        "name": "Dark Cave",
+        "description": "A mysterious cave entrance yawns before you like a mouth full of shadows. The air is cool and damp, and you can hear the distant sound of dripping water echoing from within.",
+        "connections": {
+          "south": "forest_clearing",
+          "deeper": "cave_depths"
+        },
+        "items": ["ancient_torch", "cave_crystals"],
+        "npcs": ["cave_hermit"],
+        "discovery_chance": 0.4,
+        "danger_level": 3
+      },
+      "mountain_path": {
+        "name": "Mountain Path",
+        "description": "A winding stone path carved into the mountainside. The view stretches for miles across rolling valleys and distant peaks. The air is thin and crisp at this altitude.",
+        "connections": {
+          "west": "forest_clearing",
+          "up": "mountain_peak",
+          "down": "valley_bridge"
+        },
+        "items": ["climbing_rope", "mountain_herbs"],
+        "npcs": ["mountain_guide"],
+        "discovery_chance": 0.2,
+        "danger_level": 2
+      },
+      "village_outskirts": {
+        "name": "Village Outskirts",
+        "description": "The edge of a small village with thatched-roof cottages and well-tended gardens. Smoke rises from chimneys, and you can hear the distant sounds of daily life.",
+        "connections": {
+          "north": "forest_clearing",
+          "east": "village_center",
+          "south": "farmlands"
+        },
+        "items": ["village_map", "bread_loaf"],
+        "npcs": ["village_elder", "traveling_merchant"],
+        "discovery_chance": 0.1,
+        "danger_level": 0
+      },
+      "hidden_grove": {
+        "name": "Hidden Grove",
+        "description": "A secret grove hidden deep in the forest, where ancient magic still lingers. Glowing mushrooms provide an ethereal light, and the trees seem to whisper ancient secrets.",
+        "connections": {
+          "east": "forest_clearing"
+        },
+        "items": ["magic_crystal", "enchanted_water"],
+        "npcs": ["forest_spirit"],
+        "discovery_chance": 0.6,
+        "danger_level": 1
+      },
+      "cave_depths": {
+        "name": "Cave Depths",
+        "description": "The deeper chambers of the cave system, where darkness reigns supreme. Strange formations and mineral deposits glitter in your torchlight.",
+        "connections": {
+          "surface": "dark_cave",
+          "tunnel": "underground_lake"
+        },
+        "items": ["precious_gems", "ancient_runes"],
+        "npcs": ["cave_dweller"],
+        "discovery_chance": 0.5,
+        "danger_level": 4
+      },
+      "mountain_peak": {
+        "name": "Mountain Peak",
+        "description": "The highest point of the mountain, where the world stretches endlessly in all directions. An ancient shrine sits at the summit, weathered by centuries of wind and snow.",
+        "connections": {
+          "down": "mountain_path"
+        },
+        "items": ["wind_chime", "summit_token"],
+        "npcs": ["mountain_sage"],
+        "discovery_chance": 0.7,
+        "danger_level": 2
+      },
+      "village_center": {
+        "name": "Village Center",
+        "description": "The bustling heart of the village, with a marketplace, inn, and town hall. Villagers go about their daily business, and the atmosphere is warm and welcoming.",
+        "connections": {
+          "west": "village_outskirts",
+          "north": "blacksmith_shop",
+          "south": "village_inn"
+        },
+        "items": ["coin_purse", "trade_goods"],
+        "npcs": ["town_crier", "market_vendor"],
+        "discovery_chance": 0.1,
+        "danger_level": 0
+      }
+    },
+    "items": {
+      "rusty_key": {
+        "name": "Rusty Key",
+        "description": "An old, rust-covered key that looks like it might open something important.",
+        "properties": {
+          "type": "key",
+          "usable": true,
+          "value": 10
+        }
+      },
+      "healing_herbs": {
+        "name": "Healing Herbs",
+        "description": "A bundle of medicinal herbs that could restore health when used properly.",
+        "properties": {
+          "type": "consumable",
+          "effect": "heal",
+          "power": 25,
+          "uses": 3
+        }
+      },
+      "ancient_torch": {
+        "name": "Ancient Torch",
+        "description": "A well-crafted torch that seems to burn with an otherworldly flame.",
+        "properties": {
+          "type": "tool",
+          "light_source": true,
+          "durability": 100
+        }
+      },
+      "cave_crystals": {
+        "name": "Cave Crystals",
+        "description": "Beautiful crystals that emit a soft, blue glow. They might be valuable to collectors.",
+        "properties": {
+          "type": "treasure",
+          "value": 50,
+          "magical": true
+        }
+      },
+      "climbing_rope": {
+        "name": "Climbing Rope",
+        "description": "A sturdy rope perfect for scaling cliffs or descending into depths.",
+        "properties": {
+          "type": "tool",
+          "usable": true,
+          "durability": 80
+        }
+      },
+      "magic_crystal": {
+        "name": "Magic Crystal",
+        "description": "A powerful crystal pulsing with arcane energy. It feels warm to the touch and hums with potential.",
+        "properties": {
+          "type": "artifact",
+          "magical": true,
+          "power": 100,
+          "rare": true
+        }
+      },
+      "village_map": {
+        "name": "Village Map",
+        "description": "A hand-drawn map showing the layout of the village and surrounding areas.",
+        "properties": {
+          "type": "information",
+          "reveals_locations": ["village_center", "farmlands", "blacksmith_shop"]
+        }
+      },
+      "bread_loaf": {
+        "name": "Fresh Bread",
+        "description": "A warm loaf of bread that smells absolutely delicious.",
+        "properties": {
+          "type": "consumable",
+          "effect": "nourish",
+          "power": 15
+        }
+      }
+    },
+    "npcs": {
+      "forest_guardian": {
+        "name": "Forest Guardian",
+        "description": "A tall, ethereal being made of bark and leaves who protects the forest.",
+        "personality": "wise, protective, speaks in riddles",
+        "dialogue": {
+          "greeting": "Welcome, traveler. The forest has been expecting you.",
+          "quest": "The ancient balance has been disturbed. Will you help restore it?",
+          "farewell": "May the forest spirits guide your path."
+        },
+        "quests": ["restore_forest_balance"],
+        "trades": {
+          "healing_herbs": "forest_blessing"
+        }
+      },
+      "cave_hermit": {
+        "name": "Cave Hermit",
+        "description": "An old man who has lived in the caves for decades, studying ancient mysteries.",
+        "personality": "mysterious, knowledgeable, eccentric",
+        "dialogue": {
+          "greeting": "Ah, another soul drawn to the depths. What brings you here?",
+          "quest": "I've been searching for the Lost Tome of Shadows. Have you seen it?",
+          "farewell": "The caves hold many secrets, young one."
+        },
+        "quests": ["find_lost_tome"],
+        "trades": {
+          "cave_crystals": "ancient_knowledge"
+        }
+      },
+      "village_elder": {
+        "name": "Village Elder",
+        "description": "A respected leader of the village, known for wisdom and fairness.",
+        "personality": "wise, caring, diplomatic",
+        "dialogue": {
+          "greeting": "Welcome to our humble village, traveler.",
+          "quest": "We've been troubled by strange happenings lately. Perhaps you could investigate?",
+          "farewell": "Safe travels, and remember our village fondly."
+        },
+        "quests": ["investigate_strange_happenings"],
+        "trades": {
+          "village_map": "village_blessing"
+        }
+      },
+      "traveling_merchant": {
+        "name": "Traveling Merchant",
+        "description": "A well-dressed merchant with a cart full of exotic goods from distant lands.",
+        "personality": "charismatic, opportunistic, worldly",
+        "dialogue": {
+          "greeting": "Come see my wares! The finest goods from across the realm!",
+          "quest": "I'm looking for rare items to trade. Bring me something special!",
+          "farewell": "Until we meet again on the roads!"
+        },
+        "quests": ["rare_item_collection"],
+        "trades": {
+          "coin_purse": "exotic_spices",
+          "precious_gems": "magical_amulet"
+        }
+      },
+      "forest_spirit": {
+        "name": "Forest Spirit",
+        "description": "An ancient spirit of the grove, appearing as a shimmering figure of light and shadow.",
+        "personality": "ancient, mystical, cryptic",
+        "dialogue": {
+          "greeting": "Mortal... you have found the sacred grove.",
+          "quest": "The crystal's power must be awakened. Are you worthy?",
+          "farewell": "The grove remembers all who enter."
+        },
+        "quests": ["awaken_crystal_power"],
+        "trades": {
+          "magic_crystal": "spirit_blessing"
+        }
+      }
+    },
+    "quests": {
+      "restore_forest_balance": {
+        "title": "Restore the Forest Balance",
+        "description": "The Forest Guardian speaks of a disturbance in the natural order. Investigate and restore balance to the forest.",
+        "objectives": [
+          "Find the source of the disturbance",
+          "Collect three forest essences",
+          "Return to the Forest Guardian"
+        ],
+        "rewards": ["forest_blessing", "nature_affinity"],
+        "difficulty": "medium"
+      },
+      "find_lost_tome": {
+        "title": "Find the Lost Tome",
+        "description": "The Cave Hermit seeks an ancient tome that was lost in the deeper caves.",
+        "objectives": [
+          "Explore the cave depths",
+          "Locate the Lost Tome of Shadows",
+          "Return it to the Cave Hermit"
+        ],
+        "rewards": ["ancient_knowledge", "cave_crystals"],
+        "difficulty": "hard"
+      },
+      "investigate_strange_happenings": {
+        "title": "Investigate Strange Happenings",
+        "description": "The village has been experiencing unusual events. Get to the bottom of the mystery.",
+        "objectives": [
+          "Talk to villagers about the happenings",
+          "Investigate suspicious locations",
+          "Report findings to the Village Elder"
+        ],
+        "rewards": ["village_blessing", "gold_reward"],
+        "difficulty": "easy"
+      }
+    },
+    "encounters": {
+      "forest_ambush": {
+        "name": "Forest Bandits",
+        "description": "A group of bandits emerges from behind the trees, blocking your path!",
+        "type": "combat",
+        "difficulty": 2,
+        "rewards": ["bandit_loot", "experience"],
+        "conditions": {
+          "location_types": ["forest"],
+          "probability": 0.15
+        }
+      },
+      "mountain_rockslide": {
+        "name": "Rockslide",
+        "description": "Loose rocks begin tumbling down the mountainside! You need to find shelter quickly.",
+        "type": "environmental",
+        "difficulty": 3,
+        "outcomes": {
+          "success": "You find shelter and avoid injury.",
+          "failure": "You're caught in the rockslide and take damage."
+        },
+        "conditions": {
+          "location_types": ["mountain"],
+          "probability": 0.1
+        }
+      },
+      "cave_discovery": {
+        "name": "Hidden Chamber",
+        "description": "Your torch reveals a hidden chamber carved into the cave wall.",
+        "type": "discovery",
+        "difficulty": 1,
+        "rewards": ["hidden_treasure", "ancient_artifact"],
+        "conditions": {
+          "location_types": ["cave"],
+          "probability": 0.25,
+          "requires": ["light_source"]
+        }
+      }
+    },
+    "story_templates": {
+      "opening": [
+        "You find yourself standing at the edge of a vast wilderness, your past shrouded in mystery.",
+        "The morning mist clears as you emerge from the forest, unsure of how you arrived here.",
+        "Ancient magic stirs in the air as you begin your unexpected journey.",
+        "The call of adventure echoes in your heart as you take your first steps into the unknown."
+      ],
+      "location_discovery": [
+        "As you explore further, you discover {location_name}.",
+        "Your path leads you to {location_name}, a place of wonder and mystery.",
+        "Through careful exploration, you find your way to {location_name}.",
+        "The journey brings you to {location_name}, where new adventures await."
+      ],
+      "item_found": [
+        "Hidden among the surroundings, you discover {item_name}.",
+        "Your keen eyes spot {item_name} tucked away in an unlikely place.",
+        "Fortune smiles upon you as you find {item_name}.",
+        "After searching carefully, you uncover {item_name}."
+      ],
+      "npc_encounter": [
+        "You encounter {npc_name}, who greets you with interest.",
+        "Your path crosses with {npc_name}, leading to an unexpected meeting.",
+        "As you explore, you come across {npc_name}.",
+        "{npc_name} appears before you, ready to share their knowledge."
+      ]
+    },
+    "game_settings": {
+      "max_inventory_size": 10,
+      "starting_health": 100,
+      "starting_location": "forest_clearing",
+      "enable_permadeath": false,
+      "autosave_frequency": 5,
+      "difficulty_scaling": true,
+      "random_events": true
+    }
+  }

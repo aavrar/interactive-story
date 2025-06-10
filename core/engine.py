@@ -1,12 +1,14 @@
 import json
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
+from transformers import pipeline
 from .models import Item, Choice, Scene, StoryMetadata, StoryData, GameState
-
+from nltk.tokenize import sent_tokenize
 class StoryEngine:
     def __init__(self, story_file: str):
         self.story_data = self.load_story(story_file)
         self.game_state = GameState(location="start", inventory={}, flags=[])
+        self.narrative_pipeline = pipeline('text-generation', model='microsoft/DialoGPT-medium') # or your model
 
     def load_story(self, story_file: str) -> StoryData:
         """Loads the story from a JSON file and returns a StoryData object."""
@@ -51,7 +53,7 @@ class StoryEngine:
             item = next((i for i in scene.items if i.name == item_name), None)
 
             if item:
-                print(f"Item found: {item.name}")  # Log that the item was found
+                print(f"Item found: {item.name}")
                 self.game_state.inventory[item.name] = item # Add the item to the inventory
                 scene.items = [i for i in scene.items if i.name != item.name]  # Remove from scene
                 print(f"Item '{item_name}' added to inventory and removed from scene.")  # Log the action
@@ -113,20 +115,110 @@ class StoryEngine:
                     else:
                         return "You can't do that yet."
             return "Invalid command."
+    
+
+    def clean_generated_text(self, text: str) -> str:
+        sentences = sent_tokenize(text)
+        cleaned = []
+        seen = set()
+        for s in sentences:
+            s_lower = s.strip().lower()
+            if s_lower and s_lower not in seen:
+                cleaned.append(s.strip())
+                seen.add(s_lower)
+            if len(cleaned) == 2:
+                break
+        return " ".join(cleaned)
+
+    def generate_dynamic_text(self, prompt: str, max_length: int = 30) -> str:
+        scene = self.get_current_scene()
+        base_description = next(
+            (d['text'] for d in scene.descriptions if 'condition' not in d or self.evaluate_condition(d['condition'])),
+            scene.descriptions[0]['text']
+        )
+
+        # DialoGPT works better with conversational-style prompts
+        enhanced_prompt = f"{base_description} You also notice"
+
+        try:
+            # Minimal, safe parameters for DialoGPT
+            generated = self.narrative_pipeline(
+                enhanced_prompt,
+                max_new_tokens=25,  
+                do_sample=True,
+                temperature=0.7,    
+                top_p=0.8,          
+                pad_token_id=self.narrative_pipeline.tokenizer.eos_token_id
+            )
+
+            full_text = generated[0]['generated_text']
+    
+            # Extract only the new content after the prompt
+            continuation = full_text[len(enhanced_prompt):].strip()
+    
+            # Clean up the generated text
+            if continuation:
+                # Take only the first sentence
+                sentences = sent_tokenize(continuation)
+                if sentences:
+                    sentence = sentences[0].strip()
+            
+                    # Clean up common generation artifacts
+                    sentence = sentence.replace('\n', ' ').replace('\t', ' ')
+                    sentence = ' '.join(sentence.split())  # Remove extra whitespace
+                
+                    # Remove DialoGPT-specific artifacts
+                    dialogpt_artifacts = ['<|endoftext|>', '<|im_end|>', '</s>', '<s>']
+                    for artifact in dialogpt_artifacts:
+                        sentence = sentence.replace(artifact, '')
+            
+                    # Remove incomplete sentences or weird artifacts
+                    if len(sentence) < 5 or len(sentence.split()) > 20:
+                        return ""
+            
+                    # Ensure proper capitalization and punctuation
+                    if sentence and not sentence[0].isupper():
+                        sentence = sentence[0].upper() + sentence[1:]
+            
+                    if sentence and sentence[-1] not in '.!?':
+                        sentence += '.'
+            
+                    # Basic quality check - avoid nonsensical outputs
+                    if any(word in sentence.lower() for word in ['[', ']', '###', 'prompt:', 'scene:', 'notice']):
+                        return ""
+            
+                    return sentence
+
+        except Exception as e:
+            print(f"Error generating dynamic text: {e}")
+            return ""
+
+        return ""
 
     def get_scene_output(self) -> Dict[str, Any]:
         """Returns the output for the current scene in a structured format."""
         scene = self.get_current_scene()
+    
         # Find the appropriate description based on flags
-        description = next((d['text'] for d in scene.descriptions if 'condition' not in d or self.evaluate_condition(d['condition'])), scene.descriptions[0]['text'])
+        description = next(
+            (d['text'] for d in scene.descriptions if 'condition' not in d or self.evaluate_condition(d['condition'])), 
+            scene.descriptions[0]['text']
+        )
 
+        # Generate dynamic add-on description
+        dynamic_addon = self.generate_dynamic_text("", max_length=25)
+    
+        # Only add dynamic content if it's meaningful
+        full_description = description
+        if dynamic_addon and len(dynamic_addon.strip()) > 0:
+            full_description += " " + dynamic_addon
 
         return {
             "scene_id": scene.id,
-            "description": description,
-            "items": [item.name for item in scene.items],  # Return only item names
-            "choices": [choice.action for choice in scene.choices if self.evaluate_condition(choice.condition)],  # Return only choice actions
-            "inventory": list(self.game_state.inventory.keys()), # show item names
+            "description": full_description,
+            "items": [item.name for item in scene.items],
+            "choices": [choice.action for choice in scene.choices if self.evaluate_condition(choice.condition)],
+            "inventory": list(self.game_state.inventory.keys()),
             "location": self.game_state.location,
             "flags": self.game_state.flags
         }

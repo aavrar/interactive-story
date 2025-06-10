@@ -1,13 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
+
 .App {
-  font-family: sans-serif;
-  text-align: center;
-  background-color: #f0f0f0;
-  padding: 30px;
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  background: #1a1a1a;
+  color: #ff8c00;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Remove CRT effects for authentic Linux look */
+body {
+  margin: 0;
+  padding: 0;
+  background: #1a1a1a;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  filter: hue-rotate(30deg) brightness(1.2);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -17,18 +32,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: #1a1a1a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #ff8c00;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ffaa00;
 }
 
 @keyframes App-logo-spin {
@@ -40,76 +55,266 @@
   }
 }
 
-.scene {
-  margin-bottom: 30px;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Header with system info styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.system-info {
+  color: #ff8c00;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.system-info .username {
+  color: #ffaa00;
+  font-weight: bold;
+}
+
+.system-info .hostname {
+  color: #ff6600;
 }
 
 h1 {
-  color: #333;
+  color: #ff8c00;
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Reset button styling */
+.reset-button {
+  padding: 8px 16px;
+  background: #2a2a2a;
+  color: #ff8c00;
+  border: 1px solid #444;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "Ubuntu Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background: #333;
+  border-color: #ff8c00;
+}
+
+.reset-button:active {
+  background: #444;
+}
+
+.scene {
+  margin: 0 20px 20px 20px;
+  padding: 20px;
+  background: #1a1a1a;
+  border: none;
+  color: #ff8c00;
+}
+
+.scene-info {
+  color: #ffaa00;
+  font-size: 13px;
   margin-bottom: 20px;
+  padding: 10px;
+  background: #222;
+  border-left: 3px solid #ff8c00;
+}
+
+.scene-info p {
+  margin: 5px 0;
+}
+
+.scene-info strong {
+  color: #ff6600;
 }
 
 h2 {
-  color: #666;
+  color: #ffaa00;
   margin-top: 20px;
   margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.description p {
+  color: #ff8c00;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 10px 0;
 }
 
 li {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  color: #ff8c00;
+  padding-left: 20px;
+  position: relative;
+}
+
+li::before {
+  content: '•';
+  color: #ffaa00;
+  position: absolute;
+  left: 0;
+}
+
+/* Command line styling */
+.command-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+  padding: 15px 20px;
 }
 
 form {
+  margin: 0;
+  position: relative;
+  max-width: none;
+}
+
+.command-line {
   display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
+  align-items: center;
+  background: #1a1a1a;
+  padding: 0;
+}
+
+.command-prompt {
+  color: #ffaa00;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
 input[type="text"] {
-  padding: 12px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  margin-right: 15px;
-  width: 400px;
-  font-size: 16px;
-}
-
-button {
-  padding: 12px 25px;
-  background-color: #4CAF50;
-  color: white;
+  background: transparent;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  color: #ff8c00;
+  font-size: 14px;
+  font-family: "Ubuntu Mono", monospace;
+  flex: 1;
+  outline: none;
+  caret-color: #ff8c00;
+  padding: 0;
 }
 
-button:hover {
-  background-color: #3e8e41;
+input[type="text"]::placeholder {
+  color: #666;
 }
 
-.message {
-  margin-top: 20px;
+/* Animated cursor effect */
+.command-line::after {
+  content: '';
+  width: 2px;
+  height: 16px;
+  background: #ff8c00;
+  margin-left: 3px;
+  animation: cursor-blink 1s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.command-line:focus-within::after {
+  background: #ffaa00;
+}
+
+/* Messages and results */
+.message, .result {
+  margin: 10px 20px;
   padding: 15px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
+  background: #222;
+  border-left: 3px solid #ff8c00;
+  color: #ff8c00;
+}
+
+.message::before {
+  content: '[INFO] ';
+  color: #ffaa00;
+  font-weight: bold;
+}
+
+.result::before {
+  content: '[OUTPUT] ';
+  color: #ffaa00;
+  font-weight: bold;
+}
+
+.result h3 {
+  color: #ffaa00;
+  margin: 0 0 10px 0;
+  font-size: 1em;
+  text-transform: uppercase;
 }
 
 .error {
-  margin-top: 20px;
+  margin: 10px 20px;
   padding: 15px;
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-  border-radius: 8px;
+  background: #2a1a1a;
+  color: #ff6666;
+  border-left: 3px solid #ff3333;
+}
+
+.error::before {
+  content: '[ERROR] ';
+  color: #ff3333;
+  font-weight: bold;
+}
+
+.loading {
+  color: #ffaa00;
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}
+
+/* Scrollable content area */
+.App {
+  padding-bottom: 80px; /* Space for fixed command line */
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 140, 0, 0.3);
+  color: #ffffff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

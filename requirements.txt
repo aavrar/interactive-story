@@ -1,4 +1,16 @@
 fastapi
 uvicorn
 pydantic
-gunicorn
+fastapi-middleware
+python-multipart
+requests
+transformers
+nltk
+python-jose
+passlib
+argon2-cffi
+httpx
+aiofiles
+jinja2
+itsdangerous
+email-validator

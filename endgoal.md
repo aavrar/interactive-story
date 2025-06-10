@@ -6,6 +6,46 @@ The interactive storytelling engine should leverage AI/ML to create a dynamic an
 
 ## Key Features
 
+### 1. Emotion-Based Narrative Adaptation (ML-1)
+* The system analyzes player input to classify emotional tone (e.g., fear, joy, sadness) using a pre-trained NLP model.
+* The game dynamically adjusts narrative paths or responses based on detected emotion.
+* **Current Implementation**: This is a new feature. It would require:
+  - [ ] **1.1** Install and integrate a HuggingFace emotion classifier (e.g., `distilroberta-base-emotion`) (ML-1.1)
+  - [ ] **1.2** Build a function to classify emotions from input text (ML-1.2)
+  - [ ] **1.3** Modify `StoryEngine.process_command()` to log emotions and respond accordingly (ML-1.3)
+  - [ ] **1.4** Add emotion logging to the `GameState` object (ML-1.4)
+  - [ ] **1.5** Add `/emotion` API endpoint (optional for web use) (ML-1.5)
+
+---
+
+### 2. ML-Powered Branch Prediction (ML-2)
+* The system learns from player histories to predict or recommend the most likely next scene or choice.
+* Useful for "suggest next move" features or adaptive pacing.
+* **Current Implementation**: This is a new feature. It would require:
+  - [ ] **2.1** Define training data structure (e.g., sequences of choices → next scene) (ML-2.1)
+  - [ ] **2.2** Use `CountVectorizer` + `RandomForestClassifier` to train a model (ML-2.2)
+  - [ ] **2.3** Create a `suggest_next_scene()` function (ML-2.3)
+  - [ ] **2.4** Integrate suggestions into gameplay or expose via `/suggest` endpoint (ML-2.4)
+  - [ ] **2.5** Optionally log new game sessions to expand training data (ML-2.5)
+
+---
+
+### 3. Game State Logging for ML (ML-3)
+* Player inputs, emotional trends, and decisions are logged and structured to enable long-term personalization or retraining.
+* **Current Implementation**: Partial (command history may exist). Extend with:
+  - [ ] **3.1** Extend `GameState` to include `emotion_log`, `scene_log`, and `suggestion_log` fields (ML-3.1)
+  - [ ] **3.2** Add a log writer (e.g., JSON or SQLite-based) to persist this state (ML-3.2)
+  - [ ] **3.3** Create a `/save_log` endpoint (optional) (ML-3.3)
+
+---
+
+### 4. Modular ML Integration Layer (ML-4)
+* Organize all ML functionality in a reusable, testable structure to keep logic clean.
+* **Current Implementation**: Not yet structured. To implement:
+  - [ ] **4.1** Create a `utils/emotion.py` module with the classification logic (ML-4.1)
+  - [ ] **4.2** Create a `ml/branch_predictor.py` module for training + inference (ML-4.2)
+  - [ ] **4.3** Create a `ml/logging.py` or `analytics.py` for behavior tracking (ML-4.3)
+
 ### 1. Procedural Backstory Generation (END-1)
     *   The system ingests the user's personal writing and reference pieces about the narrative.
     *   An AI/ML model analyzes this input to generate a coherent and relevant backstory for the app's world and setting.
