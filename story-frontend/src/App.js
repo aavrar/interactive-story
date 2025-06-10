@@ -209,6 +209,9 @@ function App() {
           <p>{message}</p>
         </div>
       )}
+      <div className="watermark">
+        Made by Aahad Vakani. V0.1.2.
+      </div>
     </div>
   );
 }

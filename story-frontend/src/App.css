@@ -66,6 +66,26 @@ body {
   border-bottom: 1px solid #333;
 }
 
+/* Watermark styling */
+.watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #ff8c00;
+  font-size: 11px;
+  font-family: "Ubuntu Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.watermark:hover {
+  opacity: 0.8;
+}
+
 .system-info {
   color: #ff8c00;
   font-size: 14px;
