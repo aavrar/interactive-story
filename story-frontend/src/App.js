@@ -17,7 +17,7 @@ function App() {
   const fetchScene = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8000/scene');
+      const response = await axios.get('https://interactive-story-o8z0.onrender.com/scene');
       console.log("Fetch Scene API Response:", response.data);
       
       // Check if the response contains an error
@@ -39,7 +39,7 @@ function App() {
   const startNewRun = async () => {
     console.log("Starting new run...");
     try {
-      const response = await axios.post('http://localhost:8000/start_new_run');
+      const response = await axios.post('https://interactive-story-o8z0.onrender.com/start_new_run');
       console.log("Start New Run API Response:", response.data);
       setMessage(response.data.message);
       return response;
@@ -66,7 +66,7 @@ function App() {
     if (!command.trim()) return;
     
     try {
-      const response = await axios.post('http://localhost:8000/command', { command });
+      const response = await axios.post('https://interactive-story-o8z0.onrender.com/command', { command });
       console.log("Command API Response:", response.data);
       
       // The command endpoint returns { result: "..." }
