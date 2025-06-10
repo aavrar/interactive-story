@@ -10,6 +10,8 @@ function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const backendURL = process.env.REACT_APP_BACKEND_URL || 'https://interactive-story-o8z0.onrender.com';
+
   useEffect(() => {
     startNewRunAndFetchScene();
   }, []);
@@ -17,7 +19,7 @@ function App() {
   const fetchScene = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://interactive-story-o8z0.onrender.com/scene');
+      const response = await axios.get(`${backendURL}/scene`);
       console.log("Fetch Scene API Response:", response.data);
       
       // Check if the response contains an error
@@ -39,7 +41,7 @@ function App() {
   const startNewRun = async () => {
     console.log("Starting new run...");
     try {
-      const response = await axios.post('https://interactive-story-o8z0.onrender.com/start_new_run');
+      const response = await axios.post(`${backendURL}/start_new_run`);
       console.log("Start New Run API Response:", response.data);
       setMessage(response.data.message);
       return response;
@@ -66,7 +68,7 @@ function App() {
     if (!command.trim()) return;
     
     try {
-      const response = await axios.post('https://interactive-story-o8z0.onrender.com/command', { command });
+      const response = await axios.post(`${backendURL}/command`, { command });
       console.log("Command API Response:", response.data);
       
       // The command endpoint returns { result: "..." }
@@ -84,7 +86,7 @@ function App() {
     }
   };
 
-  const handleCommandChange = (event) => {
+  const handleCommandChange = async (event) => {
     setCommand(event.target.value);
   };
 

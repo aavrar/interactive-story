@@ -56,7 +56,8 @@
         "name": "Hidden Grove",
         "description": "A secret grove hidden deep in the forest, where ancient magic still lingers. Glowing mushrooms provide an ethereal light, and the trees seem to whisper ancient secrets.",
         "connections": {
-          "east": "forest_clearing"
+          "east": "forest_clearing",
+          "north": "moonlit_pond"
         },
         "items": ["magic_crystal", "enchanted_water"],
         "npcs": ["forest_spirit"],
@@ -79,7 +80,8 @@
         "name": "Mountain Peak",
         "description": "The highest point of the mountain, where the world stretches endlessly in all directions. An ancient shrine sits at the summit, weathered by centuries of wind and snow.",
         "connections": {
-          "down": "mountain_path"
+          "down": "mountain_path",
+          "northeast": "sky_temple"
         },
         "items": ["wind_chime", "summit_token"],
         "npcs": ["mountain_sage"],
@@ -98,6 +100,323 @@
         "npcs": ["town_crier", "market_vendor"],
         "discovery_chance": 0.1,
         "danger_level": 0
+      },
+      "valley_bridge": {
+        "name": "Valley Bridge",
+        "description": "An ancient stone bridge spans a deep valley, with a rushing river far below. The bridge is weathered but sturdy, and carved runes hint at its mystical origins.",
+        "connections": {
+          "up": "mountain_path",
+          "south": "riverside_camp",
+          "east": "old_watchtower"
+        },
+        "items": ["bridge_medallion", "river_stones"],
+        "npcs": ["bridge_keeper"],
+        "discovery_chance": 0.3,
+        "danger_level": 1
+      },
+      "farmlands": {
+        "name": "Farmlands",
+        "description": "Rolling fields of golden wheat and green pastures stretch to the horizon. A few farmhouses dot the landscape, and the air is filled with the peaceful sounds of rural life.",
+        "connections": {
+          "north": "village_outskirts",
+          "east": "abandoned_barn",
+          "west": "windmill_hill"
+        },
+        "items": ["wheat_bundle", "farming_tools"],
+        "npcs": ["farmer_joel", "shepherdess_mara"],
+        "discovery_chance": 0.2,
+        "danger_level": 0
+      },
+      "blacksmith_shop": {
+        "name": "Blacksmith Shop",
+        "description": "The ring of hammer on anvil echoes from this sturdy stone building. The forge glows red-hot, and various weapons and tools hang from the walls.",
+        "connections": {
+          "south": "village_center",
+          "east": "weapon_storage"
+        },
+        "items": ["iron_ingot", "smithing_hammer"],
+        "npcs": ["master_blacksmith"],
+        "discovery_chance": 0.1,
+        "danger_level": 0
+      },
+      "village_inn": {
+        "name": "Village Inn",
+        "description": "A cozy inn with warm light spilling from its windows. The smell of hearty stew and fresh ale draws weary travelers to its welcoming embrace.",
+        "connections": {
+          "north": "village_center",
+          "west": "inn_cellar"
+        },
+        "items": ["ale_mug", "room_key"],
+        "npcs": ["innkeeper_tom"],
+        "discovery_chance": 0.1,
+        "danger_level": 0
+      },
+      "underground_lake": {
+        "name": "Underground Lake",
+        "description": "A vast subterranean lake with crystal-clear water that reflects your torchlight like liquid starlight. Strange bioluminescent creatures drift through its depths.",
+        "connections": {
+          "tunnel": "cave_depths",
+          "shore": "crystal_cavern"
+        },
+        "items": ["glowing_fish", "water_essence"],
+        "npcs": ["lake_guardian", "blind_oracle"],
+        "discovery_chance": 0.6,
+        "danger_level": 3
+      },
+      "moonlit_pond": {
+        "name": "Moonlit Pond",
+        "description": "A serene pond that seems to capture moonlight even during the day. Lily pads float on its surface, and fireflies dance above the water at twilight.",
+        "connections": {
+          "south": "hidden_grove",
+          "north": "fairy_ring"
+        },
+        "items": ["moon_lily", "crystal_water"],
+        "npcs": ["pond_nymph"],
+        "discovery_chance": 0.4,
+        "danger_level": 1
+      },
+      "sky_temple": {
+        "name": "Sky Temple",
+        "description": "An ancient temple built on a floating island of stone, accessible only by a narrow bridge of clouds. The air hums with celestial energy.",
+        "connections": {
+          "southwest": "mountain_peak",
+          "inner": "temple_sanctum"
+        },
+        "items": ["star_fragment", "celestial_orb"],
+        "npcs": ["sky_priest"],
+        "discovery_chance": 0.8,
+        "danger_level": 2
+      },
+      "riverside_camp": {
+        "name": "Riverside Camp",
+        "description": "A small campsite by the river where travelers often stop to rest. A stone fire pit and makeshift shelters suggest regular use by wanderers.",
+        "connections": {
+          "north": "valley_bridge",
+          "east": "fishing_dock",
+          "south": "river_crossing"
+        },
+        "items": ["camping_gear", "dried_fish"],
+        "npcs": ["river_guide"],
+        "discovery_chance": 0.2,
+        "danger_level": 1
+      },
+      "old_watchtower": {
+        "name": "Old Watchtower",
+        "description": "A crumbling stone tower that once served as a lookout point. Vines have claimed its walls, but the view from the top remains spectacular.",
+        "connections": {
+          "west": "valley_bridge",
+          "up": "tower_top"
+        },
+        "items": ["old_spyglass", "watchtower_flag"],
+        "npcs": ["tower_ghost"],
+        "discovery_chance": 0.5,
+        "danger_level": 2
+      },
+      "abandoned_barn": {
+        "name": "Abandoned Barn",
+        "description": "A weathered barn that has seen better days. The doors creak in the wind, and hay still fills the loft despite years of neglect.",
+        "connections": {
+          "west": "farmlands",
+          "secret": "hidden_cellar"
+        },
+        "items": ["rusty_pitchfork", "old_saddle"],
+        "npcs": ["barn_owl", "ghostly_farmer"],
+        "discovery_chance": 0.4,
+        "danger_level": 1
+      },
+      "windmill_hill": {
+        "name": "Windmill Hill",
+        "description": "A lonely windmill sits atop a grassy hill, its blades turning slowly in the breeze. Fields of grain stretch out below like a golden sea.",
+        "connections": {
+          "east": "farmlands",
+          "south": "miller_cottage"
+        },
+        "items": ["grain_sack", "windmill_gear"],
+        "npcs": ["old_miller"],
+        "discovery_chance": 0.3,
+        "danger_level": 0
+      },
+      "weapon_storage": {
+        "name": "Weapon Storage",
+        "description": "A secure room behind the blacksmith shop where finished weapons and armor are stored. Racks line the walls, displaying the smith's finest work.",
+        "connections": {
+          "west": "blacksmith_shop"
+        },
+        "items": ["steel_sword", "chainmail_vest"],
+        "npcs": ["apprentice_smith"],
+        "discovery_chance": 0.2,
+        "danger_level": 0
+      },
+      "inn_cellar": {
+        "name": "Inn Cellar",
+        "description": "The inn's wine cellar, filled with barrels of ale and bottles of fine wine. The air is cool and carries the rich scent of aging spirits.",
+        "connections": {
+          "east": "village_inn"
+        },
+        "items": ["vintage_wine", "cellar_key"],
+        "npcs": ["cellar_keeper"],
+        "discovery_chance": 0.3,
+        "danger_level": 0
+      },
+      "crystal_cavern": {
+        "name": "Crystal Cavern",
+        "description": "A breathtaking cavern where massive crystals jut from every surface, creating a natural cathedral of light and color. The crystals resonate with a haunting melody.",
+        "connections": {
+          "shore": "underground_lake",
+          "passage": "gem_mine"
+        },
+        "items": ["resonant_crystal", "crystal_shard"],
+        "npcs": ["crystal_singer"],
+        "discovery_chance": 0.7,
+        "danger_level": 2
+      },
+      "fairy_ring": {
+        "name": "Fairy Ring",
+        "description": "A perfect circle of mushrooms in a forest glade where the veil between worlds grows thin. Tiny lights dance between the toadstools at dusk.",
+        "connections": {
+          "south": "moonlit_pond",
+          "portal": "fey_realm"
+        },
+        "items": ["fairy_dust", "mushroom_circle"],
+        "npcs": ["fairy_queen"],
+        "discovery_chance": 0.9,
+        "danger_level": 1
+      },
+      "temple_sanctum": {
+        "name": "Temple Sanctum",
+        "description": "The inner chamber of the sky temple, where an altar of pure starlight stands beneath an opening to the heavens. Divine energy flows through this sacred space.",
+        "connections": {
+          "outer": "sky_temple"
+        },
+        "items": ["divine_relic", "prayer_scroll"],
+        "npcs": ["celestial_guardian"],
+        "discovery_chance": 0.8,
+        "danger_level": 3
+      },
+      "fishing_dock": {
+        "name": "Fishing Dock",
+        "description": "A wooden dock extending into the river where local fishermen cast their lines. Nets hang drying in the sun, and the smell of fresh fish fills the air.",
+        "connections": {
+          "west": "riverside_camp",
+          "south": "boat_house"
+        },
+        "items": ["fishing_rod", "fish_net"],
+        "npcs": ["fisherman_pete"],
+        "discovery_chance": 0.2,
+        "danger_level": 0
+      },
+      "river_crossing": {
+        "name": "River Crossing",
+        "description": "A shallow ford where the river can be crossed on foot during low water. Smooth stones make stepping across possible, though the current is swift.",
+        "connections": {
+          "north": "riverside_camp",
+          "east": "marshlands"
+        },
+        "items": ["smooth_stones", "river_flowers"],
+        "npcs": ["crossing_spirit"],
+        "discovery_chance": 0.3,
+        "danger_level": 1
+      },
+      "tower_top": {
+        "name": "Tower Top",
+        "description": "The highest level of the old watchtower, offering a commanding view of the surrounding lands. An ancient beacon once burned here to guide travelers.",
+        "connections": {
+          "down": "old_watchtower"
+        },
+        "items": ["beacon_crystal", "weathered_map"],
+        "npcs": ["phantom_watchman"],
+        "discovery_chance": 0.6,
+        "danger_level": 2
+      },
+      "hidden_cellar": {
+        "name": "Hidden Cellar",
+        "description": "A secret chamber beneath the abandoned barn, accessible through a concealed trapdoor. Old smuggling routes and forgotten treasures lie hidden here.",
+        "connections": {
+          "secret": "abandoned_barn"
+        },
+        "items": ["smuggler_chest", "secret_maps"],
+        "npcs": ["smuggler_ghost"],
+        "discovery_chance": 0.8,
+        "danger_level": 2
+      },
+      "miller_cottage": {
+        "name": "Miller's Cottage",
+        "description": "A quaint cottage at the base of the windmill hill, where the miller lives with his family. Flower boxes adorn the windows, and a vegetable garden grows nearby.",
+        "connections": {
+          "north": "windmill_hill"
+        },
+        "items": ["flour_bag", "cottage_key"],
+        "npcs": ["miller_wife"],
+        "discovery_chance": 0.1,
+        "danger_level": 0
+      },
+      "gem_mine": {
+        "name": "Gem Mine",
+        "description": "An old mining tunnel where precious gems were once extracted. The walls still glitter with untapped veins of valuable minerals.",
+        "connections": {
+          "passage": "crystal_cavern",
+          "shaft": "mine_depths"
+        },
+        "items": ["mining_pick", "raw_emerald"],
+        "npcs": ["retired_miner"],
+        "discovery_chance": 0.4,
+        "danger_level": 3
+      },
+      "fey_realm": {
+        "name": "Fey Realm",
+        "description": "A magical dimension where the rules of reality bend and shift. Colors are more vivid, sounds carry impossible melodies, and time flows differently.",
+        "connections": {
+          "portal": "fairy_ring"
+        },
+        "items": ["fey_essence", "dream_flower"],
+        "npcs": ["trickster_sprite"],
+        "discovery_chance": 1.0,
+        "danger_level": 2
+      },
+      "boat_house": {
+        "name": "Boat House",
+        "description": "A weathered building where small boats are stored and repaired. Oars, nets, and nautical equipment fill the space with the scent of river water and tar.",
+        "connections": {
+          "north": "fishing_dock"
+        },
+        "items": ["boat_oar", "repair_kit"],
+        "npcs": ["boat_builder"],
+        "discovery_chance": 0.2,
+        "danger_level": 0
+      },
+      "marshlands": {
+        "name": "Marshlands",
+        "description": "A misty wetland where twisted trees rise from dark water. Will-o'-wisps dance between the reeds, and the air is thick with mystery and danger.",
+        "connections": {
+          "west": "river_crossing",
+          "deep": "swamp_heart"
+        },
+        "items": ["marsh_gas", "will_o_wisp"],
+        "npcs": ["swamp_witch"],
+        "discovery_chance": 0.5,
+        "danger_level": 3
+      },
+      "mine_depths": {
+        "name": "Mine Depths",
+        "description": "The deepest level of the old gem mine, where strange formations and pockets of gas make exploration dangerous. Ancient mining equipment lies abandoned here.",
+        "connections": {
+          "shaft": "gem_mine"
+        },
+        "items": ["ancient_pickaxe", "deep_crystals"],
+        "npcs": ["mine_guardian"],
+        "discovery_chance": 0.6,
+        "danger_level": 4
+      },
+      "swamp_heart": {
+        "name": "Swamp Heart",
+        "description": "The deepest part of the marshlands, where an ancient tree of enormous size dominates the landscape. Dark magic pulses from its gnarled roots.",
+        "connections": {
+          "shallow": "marshlands"
+        },
+        "items": ["dark_root", "swamp_essence"],
+        "npcs": ["ancient_dryad"],
+        "discovery_chance": 0.7,
+        "danger_level": 4
       }
     },
     "items": {
@@ -173,6 +492,312 @@
           "effect": "nourish",
           "power": 15
         }
+      },
+      "bridge_medallion": {
+        "name": "Bridge Medallion",
+        "description": "An ornate medallion bearing the symbol of the ancient bridge builders.",
+        "properties": {
+          "type": "artifact",
+          "value": 75,
+          "historical": true
+        }
+      },
+      "river_stones": {
+        "name": "River Stones",
+        "description": "Smooth, polished stones from the river below. They're said to bring good luck.",
+        "properties": {
+          "type": "misc",
+          "value": 5,
+          "lucky": true
+        }
+      },
+      "wheat_bundle": {
+        "name": "Wheat Bundle",
+        "description": "A fresh bundle of golden wheat, ready for milling into flour.",
+        "properties": {
+          "type": "resource",
+          "value": 8,
+          "tradeable": true
+        }
+      },
+      "farming_tools": {
+        "name": "Farming Tools",
+        "description": "A set of well-maintained farming implements including a hoe and sickle.",
+        "properties": {
+          "type": "tool",
+          "durability": 60,
+          "agricultural": true
+        }
+      },
+      "iron_ingot": {
+        "name": "Iron Ingot",
+        "description": "A bar of refined iron, perfect for forging weapons or tools.",
+        "properties": {
+          "type": "material",
+          "value": 30,
+          "craftable": true
+        }
+      },
+      "smithing_hammer": {
+        "name": "Smithing Hammer",
+        "description": "A heavy hammer used by blacksmiths to shape hot metal.",
+        "properties": {
+          "type": "tool",
+          "craft_bonus": 15,
+          "durability": 90
+        }
+      },
+      "ale_mug": {
+        "name": "Ale Mug",
+        "description": "A sturdy ceramic mug filled with the inn's finest ale.",
+        "properties": {
+          "type": "consumable",
+          "effect": "refresh",
+          "power": 10
+        }
+      },
+      "room_key": {
+        "name": "Room Key",
+        "description": "A brass key that grants access to a comfortable room at the inn.",
+        "properties": {
+          "type": "key",
+          "usable": true,
+          "temporary": true
+        }
+      },
+      "glowing_fish": {
+        "name": "Glowing Fish",
+        "description": "A mysterious fish that emits bioluminescent light from its scales.",
+        "properties": {
+          "type": "ingredient",
+          "magical": true,
+          "value": 40
+        }
+      },
+      "water_essence": {
+        "name": "Water Essence",
+        "description": "Pure essence of water that holds the memories of the underground lake.",
+        "properties": {
+          "type": "essence",
+          "magical": true,
+          "power": 60
+        }
+      },
+      "moon_lily": {
+        "name": "Moon Lily",
+        "description": "A rare flower that blooms only in moonlight and holds lunar magic.",
+        "properties": {
+          "type": "ingredient",
+          "magical": true,
+          "rare": true,
+          "value": 80
+        }
+      },
+      "crystal_water": {
+        "name": "Crystal Water",
+        "description": "Water so pure it looks like liquid crystal. It has healing properties.",
+        "properties": {
+          "type": "consumable",
+          "effect": "heal",
+          "power": 35,
+          "magical": true
+        }
+      },
+      "star_fragment": {
+        "name": "Star Fragment",
+        "description": "A piece of fallen star that radiates celestial energy and warmth.",
+        "properties": {
+          "type": "artifact",
+          "magical": true,
+          "rare": true,
+          "power": 150,
+          "value": 200
+        }
+      },
+      "celestial_orb": {
+        "name": "Celestial Orb",
+        "description": "A sphere of condensed starlight that hovers slightly above your palm.",
+        "properties": {
+          "type": "artifact",
+          "magical": true,
+          "light_source": true,
+          "power": 120
+        }
+      },
+      "camping_gear": {
+        "name": "Camping Gear",
+        "description": "Essential supplies for outdoor survival including bedroll, rope, and fire starter.",
+        "properties": {
+          "type": "tool",
+          "survival_bonus": 20,
+          "durability": 50
+        }
+      },
+      "dried_fish": {
+        "name": "Dried Fish",
+        "description": "Fish preserved by smoking, providing sustenance for long journeys.",
+        "properties": {
+          "type": "consumable",
+          "effect": "nourish",
+          "power": 20,
+          "preservable": true
+        }
+      },
+      "old_spyglass": {
+        "name": "Old Spyglass",
+        "description": "A tarnished telescope that once helped watchmen spot distant dangers.",
+        "properties": {
+          "type": "tool",
+          "vision_bonus": 25,
+          "historical": true
+        }
+      },
+      "watchtower_flag": {
+        "name": "Watchtower Flag",
+        "description": "A faded banner that once flew proudly atop the watchtower.",
+        "properties": {
+          "type": "artifact",
+          "historical": true,
+          "value": 25
+        }
+      },
+      "rusty_pitchfork": {
+        "name": "Rusty Pitchfork",
+        "description": "An old farming tool that's seen better days but still has some use left.",
+        "properties": {
+          "type": "weapon",
+          "damage": 15,
+          "durability": 30,
+          "rusty": true
+        }
+      },
+      "old_saddle": {
+        "name": "Old Saddle",
+        "description": "A well-worn leather saddle that once graced a faithful steed.",
+        "properties": {
+          "type": "equipment",
+          "value": 35,
+          "historical": true
+        }
+      },
+      "grain_sack": {
+        "name": "Grain Sack",
+        "description": "A heavy sack filled with grain ready for milling.",
+        "properties": {
+          "type": "resource",
+          "value": 20,
+          "tradeable": true
+        }
+      },
+      "windmill_gear": {
+        "name": "Windmill Gear",
+        "description": "A mechanical component from the windmill's grinding mechanism.",
+        "properties": {
+          "type": "component",
+          "value": 45,
+          "mechanical": true
+        }
+      },
+      "steel_sword": {
+        "name": "Steel Sword",
+        "description": "A finely crafted blade that gleams with deadly sharpness.",
+        "properties": {
+          "type": "weapon",
+          "damage": 45,
+          "durability": 100,
+          "quality": "fine"
+        }
+      },
+      "chainmail_vest": {
+        "name": "Chainmail Vest",
+        "description": "Interlocked metal rings form a protective vest for the torso.",
+        "properties": {
+          "type": "armor",
+          "defense": 25,
+          "durability": 80,
+          "weight": "medium"
+        }
+      },
+      "vintage_wine": {
+        "name": "Vintage Wine",
+        "description": "An aged wine of exceptional quality, stored in the inn's cellar for years.",
+        "properties": {
+          "type": "consumable",
+          "effect": "celebrate",
+          "value": 60,
+          "aged": true
+        }
+      },
+      "cellar_key": {
+        "name": "Cellar Key",
+        "description": "A key that opens the inn's private wine cellar.",
+        "properties": {
+          "type": "key",
+          "usable": true,
+          "location_specific": "inn_cellar"
+        }
+      },
+      "resonant_crystal": {
+        "name": "Resonant Crystal",
+        "description": "A large crystal that vibrates with harmonic frequencies, creating beautiful music.",
+        "properties": {
+          "type": "artifact",
+          "magical": true,
+          "sound_based": true,
+          "value": 120
+        }
+      },
+      "crystal_shard": {
+        "name": "Crystal Shard",
+        "description": "A fragment of the larger cavern crystals, still retaining some magical properties.",
+        "properties": {
+          "type": "component",
+          "magical": true,
+          "value": 30
+        }
+      },
+      "fairy_dust": {
+        "name": "Fairy Dust",
+        "description": "Shimmering powder that sparkles with fey magic and grants brief flight.",
+        "properties": {
+          "type": "consumable",
+          "effect": "flight",
+          "power": 30,
+          "magical": true,
+          "rare": true
+        }
+      },
+      "mushroom_circle": {
+        "name": "Mushroom Circle Spores",
+        "description": "Spores from the fairy ring mushrooms that can create portals between realms.",
+        "properties": {
+          "type": "ingredient",
+          "magical": true,
+          "portal_component": true,
+          "rare": true
+        }
+      },
+      "divine_relic": {
+        "name": "Divine Relic",
+        "description": "A sacred artifact blessed by celestial forces, radiating holy power.",
+        "properties": {
+          "type": "artifact",
+          "magical": true,
+          "holy": true,
+          "power": 200,
+          "rare": true
+        }
+      },
+      "prayer_scroll": {
+        "name": "Prayer Scroll",
+        "description": "An ancient scroll containing powerful divine incantations.",
+        "properties": {
+          "type": "consumable",
+          "effect": "bless",
+          "power": 50,
+          "magical": true,
+          "holy": true
+        }
       }
     },
     "npcs": {
@@ -246,6 +871,414 @@
         "trades": {
           "magic_crystal": "spirit_blessing"
         }
+      },
+      "mountain_guide": {
+        "name": "Mountain Guide",
+        "description": "A placeholder description for mountain guide",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Mountain Guide.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "mountain_sage": {
+        "name": "Mountain Sage",
+        "description": "A placeholder description for mountain sage",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Mountain Sage.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "town_crier": {
+        "name": "Town Crier",
+        "description": "A placeholder description for town crier",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Town Crier.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "market_vendor": {
+        "name": "Market Vendor",
+        "description": "A placeholder description for market vendor",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Market Vendor.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "bridge_keeper": {
+        "name": "Bridge Keeper",
+        "description": "A placeholder description for bridge keeper",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Bridge Keeper.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "farmer_joel": {
+        "name": "Farmer Joel",
+        "description": "A placeholder description for farmer joel",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Farmer Joel.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "shepherdess_mara": {
+        "name": "Shepherdess Mara",
+        "description": "A placeholder description for shepherdess mara",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Shepherdess Mara.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "master_blacksmith": {
+        "name": "Master Blacksmith",
+        "description": "A placeholder description for master blacksmith",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Master Blacksmith.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "innkeeper_tom": {
+        "name": "Innkeeper Tom",
+        "description": "A placeholder description for innkeeper tom",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Innkeeper Tom.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "lake_guardian": {
+        "name": "Lake Guardian",
+        "description": "A placeholder description for lake guardian",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Lake Guardian.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "blind_oracle": {
+        "name": "Blind Oracle",
+        "description": "A placeholder description for blind oracle",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Blind Oracle.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "pond_nymph": {
+        "name": "Pond Nymph",
+        "description": "A placeholder description for pond nymph",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Pond Nymph.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "sky_priest": {
+        "name": "Sky Priest",
+        "description": "A placeholder description for sky priest",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Sky Priest.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "river_guide": {
+        "name": "River Guide",
+        "description": "A placeholder description for river guide",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am River Guide.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "tower_ghost": {
+        "name": "Tower Ghost",
+        "description": "A placeholder description for tower ghost",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Tower Ghost.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "barn_owl": {
+        "name": "Barn Owl",
+        "description": "A placeholder description for barn owl",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Barn Owl.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "ghostly_farmer": {
+        "name": "Ghostly Farmer",
+        "description": "A placeholder description for ghostly farmer",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Ghostly Farmer.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "old_miller": {
+        "name": "Old Miller",
+        "description": "A placeholder description for old miller",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Old Miller.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "apprentice_smith": {
+        "name": "Apprentice Smith",
+        "description": "A placeholder description for apprentice smith",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Apprentice Smith.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "cellar_keeper": {
+        "name": "Cellar Keeper",
+        "description": "A placeholder description for cellar keeper",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Cellar Keeper.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "crystal_singer": {
+        "name": "Crystal Singer",
+        "description": "A placeholder description for crystal singer",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Crystal Singer.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "fairy_queen": {
+        "name": "Fairy Queen",
+        "description": "A placeholder description for fairy queen",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Fairy Queen.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "celestial_guardian": {
+        "name": "Celestial Guardian",
+        "description": "A placeholder description for celestial guardian",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Celestial Guardian.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "fisherman_pete": {
+        "name": "Fisherman Pete",
+        "description": "A placeholder description for fisherman pete",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Fisherman Pete.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "crossing_spirit": {
+        "name": "Crossing Spirit",
+        "description": "A placeholder description for crossing spirit",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Crossing Spirit.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "phantom_watchman": {
+        "name": "Phantom Watchman",
+        "description": "A placeholder description for phantom watchman",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Phantom Watchman.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "smuggler_ghost": {
+        "name": "Smuggler Ghost",
+        "description": "A placeholder description for smuggler ghost",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Smuggler Ghost.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "miller_wife": {
+        "name": "Miller Wife",
+        "description": "A placeholder description for miller wife",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Miller Wife.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "retired_miner": {
+        "name": "Retired Miner",
+        "description": "A placeholder description for retired miner",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Retired Miner.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "trickster_sprite": {
+        "name": "Trickster Sprite",
+        "description": "A placeholder description for trickster sprite",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Trickster Sprite.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "boat_builder": {
+        "name": "Boat Builder",
+        "description": "A placeholder description for boat builder",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Boat Builder.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "swamp_witch": {
+        "name": "Swamp Witch",
+        "description": "A placeholder description for swamp witch",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Swamp Witch.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "mine_guardian": {
+        "name": "Mine Guardian",
+        "description": "A placeholder description for mine guardian",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Mine Guardian.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
+      },
+      "ancient_dryad": {
+        "name": "Ancient Dryad",
+        "description": "A placeholder description for ancient dryad",
+        "personality": "To be defined",
+        "dialogue": {
+          "greeting": "Hello, I am Ancient Dryad.",
+          "quest": "I have a task for you, should you choose to accept it.",
+          "farewell": "Safe travels, adventurer."
+        },
+        "quests": [],
+        "trades": {}
       }
     },
     "quests": {
@@ -357,4 +1390,4 @@
       "difficulty_scaling": true,
       "random_events": true
     }
-  }
+}
