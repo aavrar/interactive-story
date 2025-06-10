@@ -5,6 +5,7 @@ fastapi-middleware
 python-multipart
 requests
 transformers
+gunicorn
 nltk
 python-jose
 passlib
