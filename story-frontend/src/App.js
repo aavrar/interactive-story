@@ -3,6 +3,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
+async function getIntent(command, backendURL) {
+  const response = await fetch(`${backendURL}/intent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: command })
+  });
+  const data = await response.json();
+  return data.intent;
+}
+
+
+
 // --- TypewriterText Component with Sound ---
 function TypewriterText({ text, speed = 20, onDone }) {
   const [displayed, setDisplayed] = useState('');
@@ -64,11 +76,12 @@ function LoadingScreen({ progress, loading, onStart }) {
     <div className={`loading-screen${loading ? ' loading-intense' : ''}`}>
       <div className="crt-overlay"></div>
       <div className="loading-content">
-        <h1 className="loading-title">The Dark Forest Adventure</h1>
+        <h1 className="loading-title">Plot Generator</h1>
         <div className="loading-backstory">
           <p>
-            In the heart of the ancient woods, shadows twist and secrets linger. 
-            You are a lone wanderer, drawn by rumors of a lost artifact and the promise of untold power. 
+            You wake in a clearing surrounded by a forest, but don't remember how you got here. You don't remember
+            how you got here, in fact you don't remember anything. Who are you? How did you get here? 
+            All will come to those who wait. For now, you are a lone wanderer.
             Every step forward is a step deeper into the unknown. 
             Will you survive the darkness, or become just another legend whispered among the trees?
           </p>
@@ -101,9 +114,8 @@ function BootScreen({ messages, step }) {
   );
 }
 
-// --- Scene Background Helper ---
 function getSceneBgClass(scene) {
-  if (!scene) return '';
+  if (!scene || !scene.scene_id) return '';
   if (scene.scene_id.includes('forest')) return 'bg-forest';
   if (scene.scene_id.includes('cave')) return 'bg-cave';
   if (scene.scene_id.includes('village')) return 'bg-village';
@@ -124,6 +136,12 @@ function App() {
   const [conversationText, setConversationText] = useState('');
   const [progress, setProgress] = useState(0); // 0 to 100
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
+  const [showLoadModal, setShowLoadModal] = useState(false);
+  const [savesList, setSavesList] = useState([]);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [saveName, setSaveName] = useState('');
+
+
 
   // Boot sequence state
   const bootMessages = [
@@ -134,10 +152,12 @@ function App() {
     "Generating world seed...",
     "Loading locations, items, and NPCs...",
     "Applying CRT filters...",
-    "Ready."
+    "Starting World Generation."
   ];
   const [bootStep, setBootStep] = useState(0);
   const [showBoot, setShowBoot] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
+
 
   // Scene transition state
   const [sceneKey, setSceneKey] = useState(0); // for transition
@@ -212,25 +232,29 @@ function App() {
 
   const handleCommandSubmit = async (event) => {
     event.preventDefault();
-
+  
     let commandToSend = '';
     let isConversation = false;
-
+  
     if (scene && scene.current_conversation) {
       commandToSend = conversationText.trim();
       isConversation = true;
     } else {
       commandToSend = command.trim();
     }
-
+  
     if (!commandToSend) return;
-
+  
     setCommandHistory((prev) => [...prev, commandToSend]);
     setHistoryIndex(-1);
-
+  
+    // --- NEW: Get intent from backend ---
+    const intent = await getIntent(commandToSend, backendURL);
+    console.log("Predicted intent:", intent);
+  
     try {
       const response = await axios.post(`${backendURL}/command`, { command: commandToSend });
-
+  
       if (isConversation) {
         setResult(response.data.result || 'Response processed');
         setConversationText('');
@@ -238,13 +262,13 @@ function App() {
         setResult(response.data.result || 'Command processed');
         setCommand('');
       }
-
+  
       setError(null);
-
+  
       setTimeout(() => {
         fetchScene();
       }, 500);
-
+  
     } catch (error) {
       setError(error.response?.data?.detail || error.message);
       setResult('');
@@ -364,10 +388,45 @@ function App() {
   return (
     <div className={`App ${getSceneBgClass(scene)}`}>
       <div className="header">
-        <h1>The Dark Forest Adventure</h1>
-        <button className="reset-button" onClick={startNewRunAndFetchScene}>
-          RESET
-        </button>
+        <h1>Plot Generator</h1>
+        <div className="header-buttons">
+          <button
+            className="reset-button"
+            onClick={() => {
+              setShowLoadingScreen(true);
+              startNewRunAndFetchScene();
+            }}
+          >
+            RESET
+          </button>
+          <button className="help-button" aria-label="Help" onClick={() => setShowHelp(true)}>HELP</button>
+          <button className="load-button" onClick={async () => {
+            // Fetch saves and show modal
+            try {
+              const response = await axios.get(`${backendURL}/saves`);
+              setSavesList(response.data.saves || []);
+              setShowLoadModal(true);
+            } catch (err) {
+              setError("Failed to fetch saves.");
+            }
+          }}>
+            LOAD
+          </button>
+
+          <button className="save-button" onClick={() => {
+            // Default to current date/time as the save name
+            const now = new Date();
+            const defaultName = now.toLocaleString('en-US', {
+              year: 'numeric', month: '2-digit', day: '2-digit',
+              hour: '2-digit', minute: '2-digit', second: '2-digit',
+              hour12: false
+            }).replace(/[/:, ]/g, '-');
+            setSaveName(defaultName);
+            setShowSaveModal(true);
+          }}>
+            SAVE
+          </button>
+        </div>
       </div>
 
       {scene && (
@@ -449,17 +508,14 @@ function App() {
         <div className="conversation">
           <h3>Talking to: {scene.current_conversation}</h3>
           <div className="conversation-input">
-            <input
-              type="text"
-              value={conversationText}
-              onChange={handleConversationChange}
-              placeholder="Type your response..."
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleCommandSubmit(e);
-                }
-              }}
-            />
+            <form onSubmit={handleCommandSubmit}>
+              <input
+                type="text"
+                value={conversationText}
+                onChange={handleConversationChange}
+                placeholder="Type your response..."
+              />
+            </form>
             <div className="conversation-hints">
               <p><em>Try: "quest", "trade", "info", or just chat naturally</em></p>
               <p><em>Say "bye" to end the conversation</em></p>
@@ -508,6 +564,93 @@ function App() {
           <p>{result}</p>
         </div>
       )}
+      {showHelp && (
+        <div className="help-modal" onClick={() => setShowHelp(false)}>
+          <div className="help-modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Help & Tips</h2>
+            <ul>
+              <li>Type commands like <b>n</b>, <b>take torch</b>, <b>talk to hermit</b></li>
+              <li>Use arrow keys for command history</li>
+              <li>Click actions or type them in the terminal</li>
+              <li>Say <b>bye</b> to end a conversation</li>
+              <li>Press <b>Tab</b> for autocomplete</li>
+            </ul>
+            <button onClick={() => setShowHelp(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {showLoadModal && (
+        <div className="help-modal" onClick={() => setShowLoadModal(false)}>
+          <div className="help-modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Load Game</h2>
+            {savesList.length === 0 ? (
+              <p>No saves found.</p>
+            ) : (
+              <ul>
+                {savesList.map((filename) => {
+                  // Extract date/time from filename
+                  const match = filename.match(/save_(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})\.json/);
+                  const label = match
+                    ? new Date(match[1].replace(/_/g, ' ').replace(/-/g, ':').replace(' ', 'T')).toLocaleString()
+                    : filename;
+                  return (
+                    <li key={filename}>
+                      <button
+                        className="load-save-button"
+                        onClick={async () => {
+                          try {
+                            await axios.post(`${backendURL}/load`, { filename });
+                            setShowLoadModal(false);
+                            setMessage(`Loaded: ${label}`);
+                            fetchScene();
+                          } catch (err) {
+                            setError("Failed to load save.");
+                          }
+                        }}
+                      >
+                        {label}
+                      </button>
+                    </li>
+                  );
+                })}
+             </ul>
+           )}
+           <button onClick={() => setShowLoadModal(false)}>Cancel</button>
+         </div>
+        </div>
+      )}
+
+      {showSaveModal && (
+        <div className="help-modal" onClick={() => setShowSaveModal(false)}>
+          <div className="help-modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Save Game</h2>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                try {
+                  await axios.post(`${backendURL}/save`, { filename: `save_${saveName}.json` });
+                  setShowSaveModal(false);
+                  setMessage(`Game saved as: ${saveName}`);
+                } catch (err) {
+                  setError("Failed to save game.");
+                }}}>
+              <label>Save Name:
+                <input
+                  type="text"
+                  value={saveName}
+                  onChange={e => setSaveName(e.target.value)}
+                  style={{ width: '100%', marginTop: 8, marginBottom: 16 }}
+                />
+              </label>
+              <button type="submit" className="save-button">Save</button>
+              <button type="button" onClick={() => setShowSaveModal(false)} style={{ marginLeft: 12 }}>
+                Cancel
+              </button>
+          </form>
+          </div>
+        </div>
+      )}
 
       {message && (
         <div className="message">
@@ -517,6 +660,7 @@ function App() {
       <div className="watermark">
         Made by Aahad Vakani. V0.1.2.
       </div>
+
     </div>
   );
 }

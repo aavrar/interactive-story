@@ -765,3 +765,198 @@ input[type="text"]::placeholder {
   80% { opacity: 0.99; }
   90% { opacity: 1; }
 }
+/* 1. Subtle Animated Glow/Shadow to Key Elements */
+h1, .header {
+  text-shadow: 0 0 12px #ffaa00, 0 0 2px #ff8c00;
+}
+.command-prompt, .reset-button, .start-button {
+  text-shadow: 0 0 4px #ffaa00;
+}
+.result, .error, .message {
+  box-shadow: 0 0 8px #ffaa0033;
+}
+
+/* 2. Subtle Scanline/CRT Overlay to the Whole App */
+.App {
+  position: relative;
+  border-radius: 32px;
+  box-shadow: 0 0 64px #ffaa0033, 0 8px 64px #000a, 0 0 0 12px #222 inset;
+  overflow: hidden;
+  min-height: 100vh;
+}
+.App::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10000;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.025) 0px,
+    rgba(255,255,255,0.025) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  animation: crt-flicker 2.5s infinite linear;
+  pointer-events: none;
+}
+
+
+
+/* 4. Subtle Animated Cursor to Inputs */
+.command-line::after {
+  content: '';
+  width: 2px;
+  height: 1.2em;
+  background: #ffaa00;
+  margin-left: 3px;
+  animation: cursor-blink 1s steps(1) infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+
+/* 5. Fade/Slide Transition to Scene Changes */
+.scene-fade {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.scene-fade.out {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+.scene-fade.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 7. Subtle Gradient/Pattern to the Background */
+body {
+  background: linear-gradient(135deg, #1a1a1a 0%, #232323 100%);
+}
+
+/* 8. Help or "?" Button */
+/* Make help button look like reset button */
+.help-button {
+  padding: 8px 16px;
+  background: #2a2a2a;
+  color: #ff8c00;
+  border: 1px solid #444;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "Ubuntu Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+  font-weight: bold;
+  min-width: 44px;
+}
+.help-button:hover, .help-button:focus {
+  background: #333;
+  border-color: #ff8c00;
+  color: #ffaa00;
+  outline: none;
+}
+.help-button:active {
+  background: #444;
+}
+
+.save-button, .load-button {
+  padding: 8px 16px;
+  background: #2a2a2a;
+  color: #ff8c00;
+  border: 1px solid #444;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "Ubuntu Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  min-width: 44px;
+}
+.save-button:hover, .save-button:focus,
+.load-button:hover, .load-button:focus {
+  background: #333;
+  border-color: #ff8c00;
+  color: #ffaa00;
+  outline: none;
+}
+.save-button:active, .load-button:active {
+  background: #444;
+}
+
+
+/* Example Help Modal (optional) */
+.help-modal {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(20,20,20,0.95);
+  color: #ffaa00;
+  z-index: 30000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.help-modal-content {
+  background: #181818;
+  border: 2px solid #ffaa00;
+  border-radius: 12px;
+  padding: 32px 24px;
+  max-width: 400px;
+  box-shadow: 0 0 32px #ffaa0033;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 1.1em;
+  text-align: left;
+}
+.help-modal-content h2 {
+  color: #ffaa00;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.help-modal-content ul {
+  margin: 0 0 0 16px;
+  padding: 0;
+  list-style: disc;
+}
+.help-modal-content button {
+  margin-top: 24px;
+  background: #222;
+  color: #ffaa00;
+  border: 2px solid #ffaa00;
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: "Ubuntu Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 8px 20px;
+  box-shadow: 0 0 8px #ffaa0033;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.help-modal-content button:hover, .help-modal-content button:focus {
+  background: #333;
+  color: #fff;
+  border-color: #ff8c00;
+  outline: none;
+}
