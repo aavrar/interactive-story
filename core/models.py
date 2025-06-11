@@ -34,3 +34,4 @@ class GameState(BaseModel):
     location: str
     inventory: Dict[str, Dict[str, Any]] # item_name: item_properties
     flags: List[str] = []
+    current_conversation: Optional[str] = None 

@@ -372,26 +372,17 @@ class ProceduralStoryEngine:
     def _generate_scene_npcs(self, scene_id: str, run: ProceduralRun) -> List[dict]:
         """Generate NPCs for a specific scene"""
         npcs = []
-        
+
         # Get the list of NPC IDs for this scene from templates.json
         location_data = self.templates['locations'].get(scene_id)
         if location_data and 'npcs' in location_data:
             npc_ids = location_data['npcs']
-            
-            # Load NPC data from templates.json and create NPC objects
             for npc_id in npc_ids:
                 npc_data = self.templates['npcs'].get(npc_id)
                 if npc_data:
-                    npc = {
-                        "name": npc_data['name'],
-                        "description": npc_data['description'],
-                        "personality": npc_data['personality'],
-                        "dialogue": npc_data['dialogue']['greeting'],
-                        "interactions": []  # You can add interactions based on the NPC data
-                    }
-                    npcs.append(npc)
+                    npcs.append(npc_data)
         # If no location data exists, return empty list (no NPCs)
-        
+
         return npcs
 
     def _get_scene_type_from_id(self, scene_id: str) -> str:
@@ -455,10 +446,16 @@ class ProceduralStoryEngine:
         # Get items and NPCs for this scene
         scene_items = self.current_run.spawned_items.get(current_location, [])
         scene_npcs = self.current_run.spawned_npcs.get(current_location, [])
+        
+        # Debugging: Print the scene_npcs list
+        print(f"Scene NPCs: {scene_npcs}")
     
         # Add NPC interaction choices
-        for npc in scene_npcs:
-            choices.append(f"talk to {npc['name'].lower()}")
+        if not self.game_state.current_conversation:
+            for npc in scene_npcs:
+                choices.append(f"talk to {npc['name'].lower()}")
+        else:
+            choices.append("say bye (to end conversation)")
     
         # Get the scene description - first try templates.json, then fall back to generated scene
         description = "You are in an unknown location."
@@ -475,7 +472,8 @@ class ProceduralStoryEngine:
             "choices": choices,
             "inventory": list(self.game_state.inventory.keys()),
             "seed": self.current_run.seed,
-            "visited_scenes": len(self.current_run.visited_scenes)
+            "visited_scenes": len(self.current_run.visited_scenes),
+            "current_conversation": self.game_state.current_conversation.title() if self.game_state.current_conversation else None
         }
 
     def process_command(self, command: str) -> str:
@@ -500,8 +498,8 @@ class ProceduralStoryEngine:
         elif command.startswith("take "):
             return self._handle_take_item(command)
         
-        # Handle NPC interactions
-        elif command.startswith("talk to "):
+        # Handle NPC interactions and conversations
+        elif command.startswith("talk to ") or self.game_state.current_conversation:
             return self._handle_npc_interaction(command)
         
         # Standard inventory commands
@@ -713,16 +711,191 @@ class ProceduralStoryEngine:
         return f"There's no {item_name} here."
 
     def _handle_npc_interaction(self, command: str) -> str:
-        """Handle NPC interactions"""
-        npc_name = command[8:].strip()
+        """Handle NPC interactions with enhanced dialogue system"""
         current_location = self.game_state.location
         scene_npcs = self.current_run.spawned_npcs.get(current_location, [])
-        
+
+        # Check if already in a conversation
+        if self.game_state.current_conversation:
+            return self._handle_conversation_response(command, scene_npcs)
+    
+        # Start a new conversation
+        else:
+            return self._start_conversation(command, scene_npcs)
+
+    def _start_conversation(self, command: str, scene_npcs: list) -> str:
+        """Start a new conversation with an NPC"""
+        npc_name = command[8:].strip()  # Remove "talk to "
+        print(f"Command in _start_conversation: {command}")
+
         for npc in scene_npcs:
             if npc["name"].lower() == npc_name:
-                return f'{npc["name"]}: "{npc["dialogue"]}"'
-        
+                self.game_state.current_conversation = npc["name"].lower()
+
+                # Debugging: Print the NPC data
+                print(f"NPC data: {npc}")
+                print(f"Type of NPC data: {type(npc)}")
+
+                # Get greeting from NPC data
+                dialogue = npc.get("dialogue")
+                if isinstance(dialogue, dict):
+                    greeting = dialogue.get("greeting", "Hello there, traveler.")
+                else:
+                    greeting = "Hello there, traveler."  # Default greeting if dialogue is not a dict
+
+                # Generate conversation options
+                options = self._get_conversation_options(npc)
+                options_text = "\n".join([f"- {option}" for option in options])
+
+                return (f'{npc["name"]}: "{greeting}"\n\n'
+                    f'What would you like to say?\n{options_text}\n'
+                    f'(Or say "bye" to end the conversation)')
+
         return f"There's no {npc_name} here to talk to."
+
+    def _handle_conversation_response(self, command: str, scene_npcs: list) -> str:
+        """Handle responses during an active conversation"""
+        command = command.lower().strip()
+
+        # Debugging: Print the scene_npcs and the result of _get_current_npc
+        print(f"Scene NPCs: {scene_npcs}")
+        npc = self._get_current_npc(scene_npcs)
+        print(f"Current NPC: {npc}")
+
+        # Handle ending conversation
+        if command in ['bye', 'goodbye', 'leave', 'exit', 'end', 'farewell']:
+            npc_name = self.game_state.current_conversation
+            npc = self._get_current_npc(scene_npcs)
+
+            if npc:
+                dialogue = npc.get("dialogue")
+                if isinstance(dialogue, dict):
+                    farewell = dialogue.get("farewell", "Safe travels, adventurer.")
+                else:
+                    farewell = "Safe travels, adventurer."
+                self.game_state.current_conversation = None
+                return f'{npc["name"]}: "{farewell}"'
+            else:
+                self.game_state.current_conversation = None
+                return "You end the conversation."
+
+        # Handle specific dialogue options
+        npc = self._get_current_npc(scene_npcs)
+        if not npc:
+            self.game_state.current_conversation = None
+            return "That NPC is no longer here."
+
+        # Process different dialogue types
+        if command in ['quest', 'ask about quest', 'do you have any quests']:
+            dialogue = npc.get("dialogue")
+            if isinstance(dialogue, dict):
+                quest_dialogue = dialogue.get("quest", "I don't have any tasks for you right now.")
+            else:
+                quest_dialogue = "I don't have any tasks for you right now."
+            return f'{npc["name"]}: "{quest_dialogue}"'
+
+        elif command in ['trade', 'shop', 'buy', 'sell']:
+            return self._handle_trade_interaction(npc)
+
+        elif command in ['info', 'information', 'tell me about this place']:
+            return self._handle_info_request(npc)
+
+        else:
+            # Generate contextual response based on NPC personality
+            return self._generate_contextual_reply(npc, command)
+
+    def _get_current_npc(self, scene_npcs: list) -> dict:
+        """Get the NPC currently being talked to"""
+        if not self.game_state.current_conversation:
+            return None
+    
+        return next((npc for npc in scene_npcs 
+                    if npc["name"].lower() == self.game_state.current_conversation), None)
+
+    def _get_conversation_options(self, npc: dict) -> list:
+        """Generate available conversation options for an NPC"""
+        options = []
+    
+        # Check if NPC has quests
+        if npc.get("quests") or npc.get("dialogue", {}).get("quest"):
+            options.append("Ask about quests")
+    
+        # Check if NPC can trade
+        if npc.get("trades") or "merchant" in npc.get("name", "").lower():
+            options.append("Trade")
+    
+        # Always available options
+        options.extend(["Ask for information", "Just chat"])
+    
+        return options
+
+    def _handle_trade_interaction(self, npc: dict) -> str:
+        """Handle trading with NPCs"""
+        trades = npc.get("trades", {})
+    
+        if not trades:
+            return f'{npc["name"]}: "I don\'t have anything to trade right now."'
+    
+        # For now, just acknowledge trade request
+        return f'{npc["name"]}: "I have some items for trade, but my inventory system is being updated."'
+
+    def _handle_info_request(self, npc: dict) -> str:
+        """Handle information requests from NPCs"""
+        # Generate info based on NPC personality and location
+        personality = npc.get("personality", "friendly")
+    
+        info_responses = {
+            "friendly": "This is a peaceful place, though I've heard strange rumors lately.",
+            "gruff": "Not much to say about this place. Keep your wits about you.",
+            "mysterious": "There are secrets here that few understand...",
+            "wise": "This land holds many stories, if you know how to listen.",
+            "cheerful": "Oh, this is a wonderful area! So much to explore!"
+        }
+    
+        response = info_responses.get(personality, "I don't know much about this place.")
+        return f'{npc["name"]}: "{response}"'
+
+    def _generate_contextual_reply(self, npc: dict, player_input: str) -> str:
+        """Generate contextual replies based on NPC personality and player input"""
+        personality = npc.get("personality", "neutral")
+    
+        # Personality-based response patterns
+        response_patterns = {
+            "friendly": [
+                "That's interesting! Tell me more.",
+                "I appreciate you sharing that with me.",
+                "You seem like a good person to talk to."
+            ],
+            "gruff": [
+                "Hmph. If you say so.",
+                "I suppose that's one way to look at it.",
+                "Not much more to add to that."
+            ],
+            "mysterious": [
+                "There is more to that than meets the eye...",
+                "Your words carry deeper meaning.",
+                "I sense there is something you're not telling me."
+            ],
+            "wise": [
+                "Wisdom often comes from unexpected places.",
+                "Your observation shows insight.",
+                "There is truth in what you say."
+            ],
+            "cheerful": [
+                "How delightful!",
+                "That's wonderful to hear!",
+                "You've brightened my day!"
+            ]
+        }
+    
+        patterns = response_patterns.get(personality, [
+            "I see.",
+            "That's interesting.",
+            "Tell me more."
+        ])
+    
+        response = random.choice(patterns)
+        return f'{npc["name"]}: "{response}"'
 
     def load_templates(self, templates_file: str) -> dict:
         """Load template configuration from JSON file"""

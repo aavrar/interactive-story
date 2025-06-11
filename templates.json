@@ -874,408 +874,408 @@
       },
       "mountain_guide": {
         "name": "Mountain Guide",
-        "description": "A placeholder description for mountain guide",
-        "personality": "To be defined",
+        "description": "A wise hermit living in a secluded mountain cave, offering guidance to those who seek enlightenment.",
+        "personality": "calm, insightful, speaks in riddles",
         "dialogue": {
-          "greeting": "Hello, I am Mountain Guide.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome, seeker. What wisdom do you seek from these ancient peaks?",
+          "quest": "The mountain's heart is troubled. Can you find the source of its unease?",
+          "farewell": "May your path be illuminated by the mountain's wisdom."
         },
         "quests": [],
         "trades": {}
       },
       "mountain_sage": {
         "name": "Mountain Sage",
-        "description": "A placeholder description for mountain sage",
-        "personality": "To be defined",
+        "description": "A wise hermit living in a secluded mountain cave, offering guidance to those who seek enlightenment.",
+        "personality": "calm, insightful, speaks in riddles",
         "dialogue": {
-          "greeting": "Hello, I am Mountain Sage.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome, seeker. What wisdom do you seek from these ancient peaks?",
+          "quest": "The mountain's heart is troubled. Can you find the source of its unease?",
+          "farewell": "May your path be illuminated by the mountain's wisdom."
         },
         "quests": [],
         "trades": {}
       },
       "town_crier": {
         "name": "Town Crier",
-        "description": "A placeholder description for town crier",
-        "personality": "To be defined",
+        "description": "A loud and enthusiastic announcer who spreads news and rumors throughout the town square.",
+        "personality": "boisterous, gossipy, attention-seeking",
         "dialogue": {
-          "greeting": "Hello, I am Town Crier.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Hear ye, hear ye! Gather 'round for the latest news from the kingdom!",
+          "quest": "The royal messenger is missing! Can you find him and deliver the important message?",
+          "farewell": "That's all for now, folks! Stay tuned for more exciting updates!"
         },
         "quests": [],
         "trades": {}
       },
       "market_vendor": {
         "name": "Market Vendor",
-        "description": "A placeholder description for market vendor",
-        "personality": "To be defined",
+        "description": "A friendly and persuasive seller who offers a variety of goods at the bustling town market.",
+        "personality": "charming, persuasive, business-minded",
         "dialogue": {
-          "greeting": "Hello, I am Market Vendor.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my stall! I have the finest wares in all the land!",
+          "quest": "I need rare ingredients for my special potion. Can you find them for me?",
+          "farewell": "Come back anytime! I always have something new to offer."
         },
         "quests": [],
         "trades": {}
       },
       "bridge_keeper": {
         "name": "Bridge Keeper",
-        "description": "A placeholder description for bridge keeper",
-        "personality": "To be defined",
+        "description": "A stern and vigilant guardian who protects the bridge from unwanted travelers and monsters.",
+        "personality": "strict, cautious, duty-bound",
         "dialogue": {
-          "greeting": "Hello, I am Bridge Keeper.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Halt! Who goes there? State your business before crossing my bridge.",
+          "quest": "The bridge is under attack by goblins! Can you help defend it?",
+          "farewell": "Pass safely, and remember to respect the bridge's power."
         },
         "quests": [],
         "trades": {}
       },
       "farmer_joel": {
         "name": "Farmer Joel",
-        "description": "A placeholder description for farmer joel",
-        "personality": "To be defined",
+        "description": "A hardworking and simple farmer who tends to his crops and livestock with care.",
+        "personality": "humble, diligent, nature-loving",
         "dialogue": {
-          "greeting": "Hello, I am Farmer Joel.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my farm! I hope you enjoy the fresh air and sunshine.",
+          "quest": "My crops are being attacked by crows! Can you scare them away?",
+          "farewell": "Come back anytime! There's always work to be done on the farm."
         },
         "quests": [],
         "trades": {}
       },
       "shepherdess_mara": {
         "name": "Shepherdess Mara",
-        "description": "A placeholder description for shepherdess mara",
-        "personality": "To be defined",
+        "description": "A gentle and compassionate caretaker who watches over her flock of sheep in the rolling hills.",
+        "personality": "kind, nurturing, peaceful",
         "dialogue": {
-          "greeting": "Hello, I am Shepherdess Mara.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my pasture! I hope you enjoy the peaceful scenery.",
+          "quest": "My sheep are being stolen by wolves! Can you help me find them?",
+          "farewell": "Come back anytime! The sheep always appreciate a friendly face."
         },
         "quests": [],
         "trades": {}
       },
       "master_blacksmith": {
         "name": "Master Blacksmith",
-        "description": "A placeholder description for master blacksmith",
-        "personality": "To be defined",
+        "description": "A skilled and experienced craftsman who forges weapons and armor with precision and artistry.",
+        "personality": "gruff, dedicated, perfectionist",
         "dialogue": {
-          "greeting": "Hello, I am Master Blacksmith.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my forge! I have the finest weapons in all the land.",
+          "quest": "I need rare ore to create a legendary sword. Can you find it for me?",
+          "farewell": "Come back anytime! I always have new projects to work on."
         },
         "quests": [],
         "trades": {}
       },
       "innkeeper_tom": {
         "name": "Innkeeper Tom",
-        "description": "A placeholder description for innkeeper tom",
-        "personality": "To be defined",
+        "description": "A jovial and welcoming host who runs the local inn, providing food, drink, and lodging to travelers.",
+        "personality": "friendly, generous, observant",
         "dialogue": {
-          "greeting": "Hello, I am Innkeeper Tom.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my inn! I hope you enjoy your stay.",
+          "quest": "I need help cleaning up the mess after a rowdy brawl. Can you lend a hand?",
+          "farewell": "Come back anytime! There's always a warm bed and a cold drink waiting for you."
         },
         "quests": [],
         "trades": {}
       },
       "lake_guardian": {
         "name": "Lake Guardian",
-        "description": "A placeholder description for lake guardian",
-        "personality": "To be defined",
+        "description": "A mystical being who protects the sacred lake and its inhabitants from harm.",
+        "personality": "serene, wise, protective",
         "dialogue": {
-          "greeting": "Hello, I am Lake Guardian.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Greetings, traveler. You have entered the domain of the lake.",
+          "quest": "The lake is being polluted by dark magic. Can you cleanse it?",
+          "farewell": "May the lake's tranquility guide your path."
         },
         "quests": [],
         "trades": {}
       },
       "blind_oracle": {
         "name": "Blind Oracle",
-        "description": "A placeholder description for blind oracle",
-        "personality": "To be defined",
+        "description": "A mysterious seer who can glimpse into the future, offering cryptic prophecies and guidance.",
+        "personality": "enigmatic, perceptive, otherworldly",
         "dialogue": {
-          "greeting": "Hello, I am Blind Oracle.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome, seeker. The threads of fate have led you to me.",
+          "quest": "I foresee a great danger approaching. Can you prevent it?",
+          "farewell": "May your destiny be fulfilled."
         },
         "quests": [],
         "trades": {}
       },
       "pond_nymph": {
         "name": "Pond Nymph",
-        "description": "A placeholder description for pond nymph",
-        "personality": "To be defined",
+        "description": "A playful and mischievous spirit who dwells in the tranquil pond, enchanting those who cross her path.",
+        "personality": "whimsical, alluring, elusive",
         "dialogue": {
-          "greeting": "Hello, I am Pond Nymph.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my pond! I hope you enjoy the sparkling waters.",
+          "quest": "My favorite lily pad has been stolen! Can you find it for me?",
+          "farewell": "Come back anytime! The pond is always full of surprises."
         },
         "quests": [],
         "trades": {}
       },
       "sky_priest": {
         "name": "Sky Priest",
-        "description": "A placeholder description for sky priest",
-        "personality": "To be defined",
+        "description": "A devout and knowledgeable cleric who worships the celestial gods, offering blessings and guidance from above.",
+        "personality": "pious, benevolent, ethereal",
         "dialogue": {
-          "greeting": "Hello, I am Sky Priest.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome, child of the heavens. May the gods guide your path.",
+          "quest": "The celestial temple is under attack by demons! Can you help defend it?",
+          "farewell": "May the light of the heavens shine upon you."
         },
         "quests": [],
         "trades": {}
       },
       "river_guide": {
         "name": "River Guide",
-        "description": "A placeholder description for river guide",
-        "personality": "To be defined",
+        "description": "A skilled and experienced navigator who knows the waterways like the back of their hand, offering safe passage to travelers.",
+        "personality": "resourceful, adventurous, reliable",
         "dialogue": {
-          "greeting": "Hello, I am River Guide.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome aboard! I'll take you wherever you need to go on the river.",
+          "quest": "The river is blocked by a fallen tree! Can you help me clear it?",
+          "farewell": "Come back anytime! The river is always flowing."
         },
         "quests": [],
         "trades": {}
       },
       "tower_ghost": {
         "name": "Tower Ghost",
-        "description": "A placeholder description for tower ghost",
-        "personality": "To be defined",
+        "description": "A spectral resident of the ancient tower, forever bound to its crumbling walls and haunted memories.",
+        "personality": "melancholy, wistful, trapped",
         "dialogue": {
-          "greeting": "Hello, I am Tower Ghost.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my tower... a place of forgotten dreams.",
+          "quest": "I seek release from this earthly prison. Can you help me find peace?",
+          "farewell": "May you find solace in your own journey."
         },
         "quests": [],
         "trades": {}
       },
       "barn_owl": {
         "name": "Barn Owl",
-        "description": "A placeholder description for barn owl",
-        "personality": "To be defined",
+        "description": "A wise and observant creature of the night, watching over the farmlands and offering cryptic advice to those who listen.",
+        "personality": "mysterious, perceptive, solitary",
         "dialogue": {
-          "greeting": "Hello, I am Barn Owl.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Hoo... welcome to my domain. What brings you to the night?",
+          "quest": "The farmlands are plagued by rats. Can you help me control the infestation?",
+          "farewell": "Hoo... may your path be illuminated by the moon's glow."
         },
         "quests": [],
         "trades": {}
       },
       "ghostly_farmer": {
         "name": "Ghostly Farmer",
-        "description": "A placeholder description for ghostly farmer",
-        "personality": "To be defined",
+        "description": "A spectral farmer forever tending to his fields, seeking help to protect his land from encroaching darkness.",
+        "personality": "tormented, desperate, earthbound",
         "dialogue": {
-          "greeting": "Hello, I am Ghostly Farmer.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my farm... a place of endless toil.",
+          "quest": "The darkness is consuming my land. Can you help me restore it?",
+          "farewell": "May you find peace in your own harvest."
         },
         "quests": [],
         "trades": {}
       },
       "old_miller": {
         "name": "Old Miller",
-        "description": "A placeholder description for old miller",
-        "personality": "To be defined",
+        "description": "A wizened old man who runs the local mill, grinding grain and sharing stories with those who visit.",
+        "personality": "garrulous, knowledgeable, generous",
         "dialogue": {
-          "greeting": "Hello, I am Old Miller.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my mill! I hope you enjoy the scent of fresh flour.",
+          "quest": "The mill is being haunted by mischievous spirits. Can you help me banish them?",
+          "farewell": "Come back anytime! There's always a warm loaf of bread waiting for you."
         },
         "quests": [],
         "trades": {}
       },
       "apprentice_smith": {
         "name": "Apprentice Smith",
-        "description": "A placeholder description for apprentice smith",
-        "personality": "To be defined",
+        "description": "A young and eager student learning the art of blacksmithing, seeking guidance and experience.",
+        "personality": "enthusiastic, curious, hardworking",
         "dialogue": {
-          "greeting": "Hello, I am Apprentice Smith.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to the forge! I'm always eager to learn new techniques.",
+          "quest": "I need help crafting a special tool for my master. Can you lend a hand?",
+          "farewell": "Come back anytime! There's always something new to forge."
         },
         "quests": [],
         "trades": {}
       },
       "cellar_keeper": {
         "name": "Cellar Keeper",
-        "description": "A placeholder description for cellar keeper",
-        "personality": "To be defined",
+        "description": "A mysterious guardian who protects the secrets hidden within the dark and musty cellar.",
+        "personality": "secretive, watchful, protective",
         "dialogue": {
-          "greeting": "Hello, I am Cellar Keeper.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my cellar... a place of hidden treasures.",
+          "quest": "The cellar is being invaded by rats. Can you help me exterminate them?",
+          "farewell": "May your secrets remain safe within these walls."
         },
         "quests": [],
         "trades": {}
       },
       "crystal_singer": {
         "name": "Crystal Singer",
-        "description": "A placeholder description for crystal singer",
-        "personality": "To be defined",
+        "description": "A mystical performer who uses the power of crystals to create enchanting music and harmonies.",
+        "personality": "artistic, ethereal, captivating",
         "dialogue": {
-          "greeting": "Hello, I am Crystal Singer.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my concert! I hope you enjoy the melodies of the crystals.",
+          "quest": "I need rare crystals to create a new symphony. Can you find them for me?",
+          "farewell": "Come back anytime! The crystals are always singing."
         },
         "quests": [],
         "trades": {}
       },
       "fairy_queen": {
         "name": "Fairy Queen",
-        "description": "A placeholder description for fairy queen",
-        "personality": "To be defined",
+        "description": "The regal and benevolent ruler of the fairy realm, offering blessings and guidance to those who seek her wisdom.",
+        "personality": "graceful, wise, compassionate",
         "dialogue": {
-          "greeting": "Hello, I am Fairy Queen.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my realm! I hope you enjoy the magic of the fairies.",
+          "quest": "The fairy realm is being threatened by dark forces. Can you help defend it?",
+          "farewell": "May the blessings of the fairies be upon you."
         },
         "quests": [],
         "trades": {}
       },
       "celestial_guardian": {
         "name": "Celestial Guardian",
-        "description": "A placeholder description for celestial guardian",
-        "personality": "To be defined",
+        "description": "A powerful and vigilant protector of the celestial realm, guarding the gates of heaven from evil forces.",
+        "personality": "stoic, unwavering, righteous",
         "dialogue": {
-          "greeting": "Hello, I am Celestial Guardian.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to the celestial realm! I hope you are worthy of its wonders.",
+          "quest": "The celestial gates are being attacked by demons. Can you help defend them?",
+          "farewell": "May the light of the heavens guide your path."
         },
         "quests": [],
         "trades": {}
       },
       "fisherman_pete": {
         "name": "Fisherman Pete",
-        "description": "A placeholder description for fisherman pete",
-        "personality": "To be defined",
+        "description": "A weathered and experienced angler who knows the best fishing spots and shares his catch with those in need.",
+        "personality": "patient, generous, outdoorsy",
         "dialogue": {
-          "greeting": "Hello, I am Fisherman Pete.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my fishing spot! I hope you enjoy the peaceful scenery.",
+          "quest": "The fish are disappearing from the lake. Can you find out why?",
+          "farewell": "Come back anytime! There's always fish to be caught."
         },
         "quests": [],
         "trades": {}
       },
       "crossing_spirit": {
         "name": "Crossing Spirit",
-        "description": "A placeholder description for crossing spirit",
-        "personality": "To be defined",
+        "description": "A spectral guide who helps lost souls find their way to the afterlife, offering comfort and reassurance.",
+        "personality": "compassionate, ethereal, guiding",
         "dialogue": {
-          "greeting": "Hello, I am Crossing Spirit.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to the crossing! I hope you find peace on your journey.",
+          "quest": "Lost souls are being tormented by dark forces. Can you help them find rest?",
+          "farewell": "May your spirit find eternal peace."
         },
         "quests": [],
         "trades": {}
       },
       "phantom_watchman": {
         "name": "Phantom Watchman",
-        "description": "A placeholder description for phantom watchman",
-        "personality": "To be defined",
+        "description": "A ghostly sentinel forever guarding the ancient watchtower, protecting the land from unseen dangers.",
+        "personality": "vigilant, duty-bound, spectral",
         "dialogue": {
-          "greeting": "Hello, I am Phantom Watchman.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my watchtower! I hope you are prepared for the dangers that lie ahead.",
+          "quest": "The watchtower is being haunted by malevolent spirits. Can you help banish them?",
+          "farewell": "May your path be protected by the light of the watchtower."
         },
         "quests": [],
         "trades": {}
       },
       "smuggler_ghost": {
         "name": "Smuggler Ghost",
-        "description": "A placeholder description for smuggler ghost",
-        "personality": "To be defined",
+        "description": "A mischievous spirit who haunts the hidden cellar, guarding their ill-gotten gains and offering shady deals.",
+        "personality": "cunning, opportunistic, spectral",
         "dialogue": {
-          "greeting": "Hello, I am Smuggler Ghost.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my cellar! I hope you are looking for something special.",
+          "quest": "My treasure is being stolen by thieves. Can you help me recover it?",
+          "farewell": "Come back anytime! I always have new deals to offer."
         },
         "quests": [],
         "trades": {}
       },
       "miller_wife": {
         "name": "Miller Wife",
-        "description": "A placeholder description for miller wife",
-        "personality": "To be defined",
+        "description": "A kind and hardworking woman who helps her husband run the mill, baking bread and sharing stories with visitors.",
+        "personality": "warm, generous, nurturing",
         "dialogue": {
-          "greeting": "Hello, I am Miller Wife.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to our mill! I hope you enjoy the scent of fresh bread.",
+          "quest": "The mill is being plagued by rats. Can you help me exterminate them?",
+          "farewell": "Come back anytime! There's always a warm loaf of bread waiting for you."
         },
         "quests": [],
         "trades": {}
       },
       "retired_miner": {
         "name": "Retired Miner",
-        "description": "A placeholder description for retired miner",
-        "personality": "To be defined",
+        "description": "A grizzled old man who spent his life toiling in the mines, now seeking peace and quiet in his twilight years.",
+        "personality": "gruff, experienced, weary",
         "dialogue": {
-          "greeting": "Hello, I am Retired Miner.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my cabin! I hope you enjoy the peace and quiet.",
+          "quest": "The mines are being haunted by restless spirits. Can you help me appease them?",
+          "farewell": "Come back anytime! There's always a warm fire burning."
         },
         "quests": [],
         "trades": {}
       },
       "trickster_sprite": {
         "name": "Trickster Sprite",
-        "description": "A placeholder description for trickster sprite",
-        "personality": "To be defined",
+        "description": "A mischievous and playful spirit who delights in playing pranks and causing chaos, testing the wits of those who cross their path.",
+        "personality": "whimsical, cunning, unpredictable",
         "dialogue": {
-          "greeting": "Hello, I am Trickster Sprite.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my forest! I hope you enjoy the surprises.",
+          "quest": "I've hidden a treasure somewhere in the forest. Can you find it?",
+          "farewell": "Come back anytime! There's always a new prank to be played."
         },
         "quests": [],
         "trades": {}
       },
       "boat_builder": {
         "name": "Boat Builder",
-        "description": "A placeholder description for boat builder",
-        "personality": "To be defined",
+        "description": "A skilled craftsman who constructs sturdy vessels, offering passage across treacherous waters.",
+        "personality": "methodical, precise, reliable",
         "dialogue": {
-          "greeting": "Hello, I am Boat Builder.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my workshop! I hope you are looking for a seaworthy vessel.",
+          "quest": "I need rare materials to build a legendary ship. Can you find them for me?",
+          "farewell": "Come back anytime! There's always a new boat to be built."
         },
         "quests": [],
         "trades": {}
       },
       "swamp_witch": {
         "name": "Swamp Witch",
-        "description": "A placeholder description for swamp witch",
-        "personality": "To be defined",
+        "description": "A mysterious recluse dwelling in the murky depths of the swamp, brewing potions and offering cryptic advice.",
+        "personality": "enigmatic, reclusive, knowledgeable",
         "dialogue": {
-          "greeting": "Hello, I am Swamp Witch.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my swamp! I hope you are not afraid of the dark.",
+          "quest": "The swamp is being poisoned by a dark magic. Can you help me cleanse it?",
+          "farewell": "Come back anytime! There's always a new potion to be brewed."
         },
         "quests": [],
         "trades": {}
       },
       "mine_guardian": {
         "name": "Mine Guardian",
-        "description": "A placeholder description for mine guardian",
-        "personality": "To be defined",
+        "description": "A stalwart protector of the underground tunnels, ensuring the safety of miners and guarding against subterranean threats.",
+        "personality": "vigilant, courageous, protective",
         "dialogue": {
-          "greeting": "Hello, I am Mine Guardian.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my mine! I hope you are prepared for the dangers that lie below.",
+          "quest": "The mine is being invaded by monsters. Can you help defend it?",
+          "farewell": "May your path be protected by the light of the mine."
         },
         "quests": [],
         "trades": {}
       },
       "ancient_dryad": {
         "name": "Ancient Dryad",
-        "description": "A placeholder description for ancient dryad",
-        "personality": "To be defined",
+        "description": "A wise and ancient tree spirit, deeply connected to the forest and offering guidance to those who respect nature.",
+        "personality": "serene, knowledgeable, protective",
         "dialogue": {
-          "greeting": "Hello, I am Ancient Dryad.",
-          "quest": "I have a task for you, should you choose to accept it.",
-          "farewell": "Safe travels, adventurer."
+          "greeting": "Welcome to my forest! I hope you appreciate the beauty of nature.",
+          "quest": "The forest is being destroyed by deforestation. Can you help me protect it?",
+          "farewell": "May your path be guided by the wisdom of the trees."
         },
         "quests": [],
         "trades": {}
