@@ -15,3 +15,5 @@ aiofiles
 jinja2
 itsdangerous
 email-validator
+python-dotenv
+
