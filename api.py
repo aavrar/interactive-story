@@ -13,9 +13,15 @@ load_dotenv()
 
 app = FastAPI()
 
+# Configure CORS
+origins = [
+    "https://interactive-story-zeta.vercel.app",  # Your Vercel domain
+    "http://localhost:3000",  # For local development
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
