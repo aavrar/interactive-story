@@ -1,3 +1,5 @@
+# core/models.py
+
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
@@ -16,9 +18,9 @@ class Choice(BaseModel):
 
 class Scene(BaseModel):
     id: str
-    descriptions: List[Dict[str,str]]
-    items: List[Item]
-    choices: List[Choice]
+    descriptions: List[Dict[str, str]]
+    items: List[Item] = []
+    choices: List[Choice] = []
     flags: List[str] = []
 
 class StoryMetadata(BaseModel):
@@ -32,6 +34,8 @@ class StoryData(BaseModel):
 
 class GameState(BaseModel):
     location: str
-    inventory: Dict[str, Dict[str, Any]] # item_name: item_properties
+    inventory: Dict[str, Item] = {}
     flags: List[str] = []
-    current_conversation: Optional[str] = None 
+    current_conversation: Optional[str] = None
+    player_name: Optional[str] = None
+    player_class: Optional[str] = None
