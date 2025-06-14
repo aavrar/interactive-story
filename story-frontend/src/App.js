@@ -3,17 +3,126 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
-async function getIntent(command, backendURL) {
-  const response = await fetch(`${backendURL}/intent`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: command })
-  });
-  const data = await response.json();
-  return data.intent;
+// --- Tutorial Component ---
+const CLASSES = [
+  { name: "Wanderer", desc: "Balanced stats, good at exploring." },
+  { name: "Mystic", desc: "High magic, low strength." },
+  { name: "Warrior", desc: "High strength, low magic." },
+  { name: "Rogue", desc: "Stealthy and quick." }
+];
+
+function Tutorial({ onComplete, worldGenProgress, worldGenDone }) {
+  const [step, setStep] = useState(0);
+  const [name, setName] = useState('');
+  const [chosenClass, setChosenClass] = useState(CLASSES[0].name);
+  const [showClassDesc, setShowClassDesc] = useState(false);
+
+  const next = () => setStep(s => s + 1);
+
+  return (
+    <div className="tutorial-screen">
+      <div className="scene scene-fade in">
+        <div className="description">
+          {step === 0 && (
+            <>
+              <h2>Forest Clearing</h2>
+              <p>
+                You awaken in a misty forest clearing. A gentle light filters through the trees.
+                A mysterious figure in a glowing cloak stands before you.
+              </p>
+              <p>
+                <span className="clickable-text npc" onClick={next}>Approach the guide</span>
+              </p>
+            </>
+          )}
+          {step === 1 && (
+            <>
+              <h2>The Guide</h2>
+              <p>
+                <b>Guide:</b> "Welcome, traveler. Before you begin your journey, tell me your <b>name</b>."
+              </p>
+              <form onSubmit={e => { e.preventDefault(); if (name) next(); }}>
+                <input
+                  className="tutorial-input"
+                  type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder="Enter your name..."
+                  autoFocus
+                />
+                <button className="start-button" type="submit" disabled={!name}>Continue</button>
+              </form>
+            </>
+          )}
+          {step === 2 && (
+            <>
+              <h2>Choose Your Class</h2>
+              <p>
+                <b>Guide:</b> "Every adventurer has a calling. What <b>class</b> do you feel drawn to?"
+              </p>
+              <div className="class-choices">
+                {CLASSES.map(cls => (
+                  <div
+                    key={cls.name}
+                    className={`class-choice${chosenClass === cls.name ? ' selected' : ''}`}
+                    onClick={() => { setChosenClass(cls.name); setShowClassDesc(true); }}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setChosenClass(cls.name); setShowClassDesc(true); } }}
+                  >
+                    {cls.name}
+                  </div>
+                ))}
+              </div>
+              {showClassDesc && (
+                <div className="class-desc">
+                  {CLASSES.find(c => c.name === chosenClass).desc}
+                </div>
+              )}
+              <button className="start-button" style={{ marginTop: 16 }} onClick={next}>Confirm</button>
+            </>
+          )}
+          {step === 3 && (
+            <>
+              <h2>How to Play</h2>
+              <p>
+                <b>Guide:</b> "This world responds to your <b>commands</b>. Try moving by typing <span className="clickable-text choice">go north</span> or by <span className="clickable-text choice">clicking on actions</span>."
+              </p>
+              <p>
+                "To pick up items, type <span className="clickable-text item">take torch</span> or click on the item name."
+              </p>
+              <p>
+                "To talk to people, type <span className="clickable-text npc">talk to guide</span> or click on their name."
+              </p>
+              <button className="start-button" onClick={next}>Continue</button>
+            </>
+          )}
+          {step === 4 && (
+            <>
+              <h2>Ready?</h2>
+              <p>
+                <b>Guide:</b> "Are you ready to begin your adventure, <b>{name}</b> the <b>{chosenClass}</b>?"
+              </p>
+              <button
+                className="start-button"
+                onClick={() => onComplete({ name, chosenClass })}
+                disabled={!worldGenDone}
+                style={worldGenDone ? {} : { opacity: 0.6, cursor: 'not-allowed' }}
+              >
+                {worldGenDone ? "Enter the World" : `Preparing the world... (${worldGenProgress}%)`}
+              </button>
+              {!worldGenDone && (
+                <div className="tutorial-progress-bar-outer">
+                  <div className="tutorial-progress-bar" style={{ width: `${worldGenProgress}%` }} />
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
-
-
 
 // --- TypewriterText Component with Sound ---
 function TypewriterText({ text, speed = 20, onDone }) {
@@ -26,7 +135,6 @@ function TypewriterText({ text, speed = 20, onDone }) {
     indexRef.current = 0;
     if (!text) return;
 
-    // Load sound only once
     if (!typeSound.current) {
       typeSound.current = new window.Audio('/sounds/type.wav');
       typeSound.current.volume = 0.08;
@@ -54,7 +162,6 @@ function TypewriterText({ text, speed = 20, onDone }) {
   return <span>{displayed}</span>;
 }
 
-// --- ProgressBar Component ---
 function ProgressBar({ loading, progress }) {
   if (!loading && progress === 0) return null;
   return (
@@ -70,7 +177,6 @@ function ProgressBar({ loading, progress }) {
   );
 }
 
-// --- LoadingScreen Component ---
 function LoadingScreen({ progress, loading, onStart }) {
   return (
     <div className={`loading-screen${loading ? ' loading-intense' : ''}`}>
@@ -97,7 +203,6 @@ function LoadingScreen({ progress, loading, onStart }) {
   );
 }
 
-// --- BootScreen Component ---
 function BootScreen({ messages, step }) {
   return (
     <div className="loading-screen loading-intense">
@@ -125,8 +230,17 @@ function getSceneBgClass(scene) {
   return '';
 }
 
+async function getIntent(command, backendURL) {
+  const response = await fetch(`${backendURL}/intent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: command })
+  });
+  const data = await response.json();
+  return data.intent;
+}
+
 function App() {
-  // --- State ---
   const [scene, setScene] = useState(null);
   const [command, setCommand] = useState('');
   const [message, setMessage] = useState('');
@@ -134,16 +248,19 @@ function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(true);
   const [conversationText, setConversationText] = useState('');
-  const [progress, setProgress] = useState(0); // 0 to 100
+  const [progress, setProgress] = useState(0);
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [savesList, setSavesList] = useState([]);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [saveName, setSaveName] = useState('');
+  const [showTutorial, setShowTutorial] = useState(true);
+  const [playerInfo, setPlayerInfo] = useState({ name: '', chosenClass: '' });
 
+  // World generation progress state
+  const [worldGenProgress, setWorldGenProgress] = useState(0);
+  const [worldGenDone, setWorldGenDone] = useState(false);
 
-
-  // Boot sequence state
   const bootMessages = [
     "Booting up Dark Forest Adventure OS v0.1.2...",
     "Initializing memory banks...",
@@ -158,30 +275,82 @@ function App() {
   const [showBoot, setShowBoot] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
 
+  const [sceneKey, setSceneKey] = useState(0);
+  const [sceneVisible, setSceneVisible] = useState(true);
 
-  // Scene transition state
-  const [sceneKey, setSceneKey] = useState(0); // for transition
-  const [sceneVisible, setSceneVisible] = useState(true); // for fade
-
-  // Command history & autocomplete
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [autocompleteOptions, setAutocompleteOptions] = useState([]);
   const [autocompleteIndex, setAutocompleteIndex] = useState(-1);
 
-  // For inventory animation
   const [newlyAddedItem, setNewlyAddedItem] = useState(null);
 
   const backendURL = process.env.REACT_APP_BACKEND_URL || 'https://interactive-story-o8z0.onrender.com';
 
-  // --- Functions ---
+  // --- World Generation in Background ---
+  useEffect(() => {
+    if (showTutorial) {
+      // Start world generation as soon as tutorial starts
+      let cancelled = false;
+      setWorldGenProgress(0);
+      setWorldGenDone(false);
+
+      // Start the world generation process
+      axios.post(`${backendURL}/start_new_run`, { name: "", chosenClass: "" })
+        .then(() => {
+          // Poll for progress
+          const poll = () => {
+            axios.get(`${backendURL}/status`)
+              .then(res => {
+                if (cancelled) return;
+                // Simulate progress: if status is active, set to 100%
+                if (res.data.status === "active") {
+                  setWorldGenProgress(100);
+                  setWorldGenDone(true);
+                } else {
+                  // Simulate progress bar (for demo, increment by 10% every 0.5s)
+                  setWorldGenProgress(prev => {
+                    if (prev < 90) return prev + 10;
+                    return prev;
+                  });
+                  setTimeout(poll, 500);
+                }
+              })
+              .catch(() => {
+                if (!cancelled) setTimeout(poll, 700);
+              });
+          };
+          poll();
+        })
+        .catch(() => {
+          setWorldGenProgress(100);
+          setWorldGenDone(true);
+        });
+
+      return () => { cancelled = true; };
+    }
+  }, [showTutorial, backendURL]);
+
+  // --- After tutorial, set player info and fetch scene ---
+  useEffect(() => {
+    if (!showTutorial && playerInfo.name && playerInfo.chosenClass) {
+      // Set player info and restart run with correct info
+      axios.post(`${backendURL}/start_new_run`, {
+        name: playerInfo.name,
+        chosenClass: playerInfo.chosenClass
+      }).then(() => {
+        fetchScene();
+      });
+    }
+    // eslint-disable-next-line
+  }, [showTutorial, playerInfo]);
+
   const fetchScene = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${backendURL}/scene`);
-      setSceneVisible(false); // start fade out
+      setSceneVisible(false);
       setTimeout(() => {
-        // Find new inventory item
         if (scene && response.data && response.data.inventory) {
           const prevInv = scene.inventory || [];
           const newInv = response.data.inventory;
@@ -190,9 +359,9 @@ function App() {
           if (added) setTimeout(() => setNewlyAddedItem(null), 1200);
         }
         setScene(response.data);
-        setSceneKey((k) => k + 1); // change key to force re-mount
-        setSceneVisible(true); // fade in
-      }, 300); // match fade duration in CSS
+        setSceneKey((k) => k + 1);
+        setSceneVisible(true);
+      }, 300);
       setError(null);
       setProgress(100);
       setLoading(false);
@@ -204,57 +373,29 @@ function App() {
     }
   };
 
-  const startNewRun = async () => {
-    try {
-      const response = await axios.post(`${backendURL}/start_new_run`);
-      setMessage(response.data.message);
-      return response;
-    } catch (error) {
-      setError(error.response?.data?.detail || error.message);
-      return null;
-    }
-  };
-
-  const startNewRunAndFetchScene = async () => {
-    setLoading(true);
-    setProgress(10); // Starting
-    const newRunResponse = await startNewRun();
-    setProgress(50); // Halfway after new run
-    if (newRunResponse && newRunResponse.status === 200) {
-      await fetchScene();
-      setProgress(100); // Done
-    } else {
-      setError("Failed to start new run.");
-      setLoading(false);
-      setProgress(0);
-    }
-  };
-
   const handleCommandSubmit = async (event) => {
     event.preventDefault();
-  
     let commandToSend = '';
     let isConversation = false;
-  
+
     if (scene && scene.current_conversation) {
       commandToSend = conversationText.trim();
       isConversation = true;
     } else {
       commandToSend = command.trim();
     }
-  
+
     if (!commandToSend) return;
-  
+
     setCommandHistory((prev) => [...prev, commandToSend]);
     setHistoryIndex(-1);
-  
-    // --- NEW: Get intent from backend ---
+
     const intent = await getIntent(commandToSend, backendURL);
     console.log("Predicted intent:", intent);
-  
+
     try {
       const response = await axios.post(`${backendURL}/command`, { command: commandToSend });
-  
+
       if (isConversation) {
         setResult(response.data.result || 'Response processed');
         setConversationText('');
@@ -262,13 +403,49 @@ function App() {
         setResult(response.data.result || 'Command processed');
         setCommand('');
       }
-  
+
       setError(null);
-  
+
       setTimeout(() => {
         fetchScene();
       }, 500);
-  
+
+    } catch (error) {
+      setError(error.response?.data?.detail || error.message);
+      setResult('');
+    }
+  };
+
+  // --- Clickable text handlers ---
+  const handleChoiceClick = async (choice) => {
+    setCommandHistory((prev) => [...prev, choice]);
+    setHistoryIndex(-1);
+    try {
+      const response = await axios.post(`${backendURL}/command`, { command: choice });
+      setResult(response.data.result || 'Command processed');
+      setCommand('');
+      setError(null);
+      setTimeout(() => {
+        fetchScene();
+      }, 500);
+    } catch (error) {
+      setError(error.response?.data?.detail || error.message);
+      setResult('');
+    }
+  };
+
+  const handleItemClick = async (item) => {
+    const takeCommand = `take ${item}`;
+    setCommandHistory((prev) => [...prev, takeCommand]);
+    setHistoryIndex(-1);
+    try {
+      const response = await axios.post(`${backendURL}/command`, { command: takeCommand });
+      setResult(response.data.result || 'Item taken');
+      setCommand('');
+      setError(null);
+      setTimeout(() => {
+        fetchScene();
+      }, 500);
     } catch (error) {
       setError(error.response?.data?.detail || error.message);
       setResult('');
@@ -281,7 +458,6 @@ function App() {
   };
 
   const handleCommandKeyDown = (e) => {
-    // Command history
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (commandHistory.length > 0) {
@@ -302,7 +478,6 @@ function App() {
         }
       }
     }
-    // Autocomplete
     else if (e.key === 'Tab' && autocompleteOptions.length > 0) {
       e.preventDefault();
       setCommand(autocompleteOptions[autocompleteIndex >= 0 ? autocompleteIndex : 0]);
@@ -321,24 +496,17 @@ function App() {
     setConversationText(event.target.value);
   };
 
-  // --- Effects ---
-  useEffect(() => {
-    startNewRunAndFetchScene();
-    // eslint-disable-next-line
-  }, []);
-
   useEffect(() => {
     if (showBoot && bootStep < bootMessages.length) {
       const timeout = setTimeout(() => {
         setBootStep(bootStep + 1);
-      }, 700); // Adjust speed as desired
+      }, 700);
       return () => clearTimeout(timeout);
     } else if (showBoot && bootStep === bootMessages.length) {
       setTimeout(() => setShowBoot(false), 700);
     }
   }, [bootStep, showBoot]);
 
-  // Autocomplete options
   useEffect(() => {
     if (!command) {
       setAutocompleteOptions([]);
@@ -354,9 +522,21 @@ function App() {
     }
   }, [command, scene]);
 
-  // --- Conditional Renders ---
   if (showBoot) {
     return <BootScreen messages={bootMessages} step={bootStep} />;
+  }
+
+  if (showTutorial) {
+    return (
+      <Tutorial
+        onComplete={({ name, chosenClass }) => {
+          setPlayerInfo({ name, chosenClass });
+          setShowTutorial(false);
+        }}
+        worldGenProgress={worldGenProgress}
+        worldGenDone={worldGenDone}
+      />
+    );
   }
 
   if (showLoadingScreen) {
@@ -378,13 +558,12 @@ function App() {
       <div className="App">
         <div className="error">
           <h2>Error: {error}</h2>
-          <button onClick={startNewRunAndFetchScene}>Try Again</button>
+          <button onClick={fetchScene}>Try Again</button>
         </div>
       </div>
     );
   }
 
-  // --- Main App Render ---
   return (
     <div className={`App ${getSceneBgClass(scene)}`}>
       <div className="header">
@@ -394,14 +573,13 @@ function App() {
             className="reset-button"
             onClick={() => {
               setShowLoadingScreen(true);
-              startNewRunAndFetchScene();
+              fetchScene();
             }}
           >
             RESET
           </button>
           <button className="help-button" aria-label="Help" onClick={() => setShowHelp(true)}>HELP</button>
           <button className="load-button" onClick={async () => {
-            // Fetch saves and show modal
             try {
               const response = await axios.get(`${backendURL}/saves`);
               setSavesList(response.data.saves || []);
@@ -412,9 +590,7 @@ function App() {
           }}>
             LOAD
           </button>
-
           <button className="save-button" onClick={() => {
-            // Default to current date/time as the save name
             const now = new Date();
             const defaultName = now.toLocaleString('en-US', {
               year: 'numeric', month: '2-digit', day: '2-digit',
@@ -450,7 +626,17 @@ function App() {
             {scene.npcs && scene.npcs.length > 0 ? (
               <ul>
                 {scene.npcs.map((npc, index) => (
-                  <li key={index}>{npc}</li>
+                  <li key={index}>
+                    <span
+                      className="clickable-text npc"
+                      onClick={() => handleChoiceClick(`talk to ${npc.toLowerCase()}`)}
+                      tabIndex={0}
+                      role="link"
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleChoiceClick(`talk to ${npc.toLowerCase()}`); }}
+                    >
+                      {npc}
+                    </span>
+                  </li>
                 ))}
               </ul>
             ) : (
@@ -463,7 +649,17 @@ function App() {
             {scene.items && scene.items.length > 0 ? (
               <ul>
                 {scene.items.map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <span
+                      className="clickable-text item"
+                      onClick={() => handleItemClick(item)}
+                      tabIndex={0}
+                      role="link"
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleItemClick(item); }}
+                    >
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             ) : (
@@ -494,7 +690,17 @@ function App() {
             {scene.choices && scene.choices.length > 0 ? (
               <ul>
                 {scene.choices.map((choice, index) => (
-                  <li key={index}>{choice}</li>
+                  <li key={index}>
+                    <span
+                      className="clickable-text choice"
+                      onClick={() => handleChoiceClick(choice)}
+                      tabIndex={0}
+                      role="link"
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleChoiceClick(choice); }}
+                    >
+                      {choice}
+                    </span>
+                  </li>
                 ))}
               </ul>
             ) : (
@@ -589,7 +795,6 @@ function App() {
             ) : (
               <ul>
                 {savesList.map((filename) => {
-                  // Extract date/time from filename
                   const match = filename.match(/save_(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})\.json/);
                   const label = match
                     ? new Date(match[1].replace(/_/g, ' ').replace(/-/g, ':').replace(' ', 'T')).toLocaleString()
@@ -660,7 +865,6 @@ function App() {
       <div className="watermark">
         Made by Aahad Vakani. V0.1.2.
       </div>
-
     </div>
   );
 }

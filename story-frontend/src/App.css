@@ -960,3 +960,128 @@ body {
   border-color: #ff8c00;
   outline: none;
 }
+
+/* App.css (add at the end or in a relevant section) */
+
+.clickable-text {
+  cursor: pointer;
+  color: #ffaa00;
+  text-decoration: underline dotted;
+  transition: color 0.18s, background 0.18s, text-shadow 0.18s;
+  text-shadow: 0 1px 8px #ffaa0033;
+  outline: none;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 0 0.18em;
+  background: linear-gradient(90deg, rgba(255,140,0,0.07) 0%, rgba(255,170,0,0.09) 100%);
+  box-shadow: 0 1px 4px #ffaa0022;
+  display: inline-block;
+}
+
+.clickable-text:hover, .clickable-text:focus {
+  color: #fffbe6;
+  background: linear-gradient(90deg, #ffaa00 0%, #ff8c00 100%);
+  text-shadow: 0 2px 16px #ffaa00cc;
+  outline: 2px solid #ffaa00;
+}
+
+.clickable-text.item {
+  color: #ffe066;
+  background: linear-gradient(90deg, rgba(255,224,102,0.08) 0%, rgba(255,224,102,0.13) 100%);
+}
+.clickable-text.item:hover, .clickable-text.item:focus {
+  color: #1a1a1a;
+  background: linear-gradient(90deg, #ffe066 0%, #ffb700 100%);
+  outline: 2px solid #ffe066;
+}
+
+.clickable-text.npc {
+  color: #d0aaff;
+  background: linear-gradient(90deg, rgba(208,170,255,0.08) 0%, rgba(208,170,255,0.13) 100%);
+}
+.clickable-text.npc:hover, .clickable-text.npc:focus {
+  color: #1a1a1a;
+  background: linear-gradient(90deg, #d0aaff 0%, #b84dff 100%);
+  outline: 2px solid #d0aaff;
+}
+
+.clickable-text.choice {
+  color: #ffaa00;
+  background: linear-gradient(90deg, rgba(255,170,0,0.08) 0%, rgba(255,170,0,0.13) 100%);
+}
+.clickable-text.choice:hover, .clickable-text.choice:focus {
+  color: #1a1a1a;
+  background: linear-gradient(90deg, #ffaa00 0%, #ff8c00 100%);
+  outline: 2px solid #ffaa00;
+}
+
+/* Tutorial styles */
+.tutorial-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #1a2a1a 0%, #2e4d2e 100%);
+  animation: fadein 0.7s;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.tutorial-input {
+  background: #222;
+  color: #ffaa00;
+  border: 1.5px solid #ffaa00;
+  border-radius: 4px;
+  font-size: 1.1em;
+  padding: 8px 14px;
+  margin-right: 10px;
+  font-family: "Ubuntu Mono", monospace;
+  margin-bottom: 10px;
+}
+.class-choices {
+  display: flex;
+  gap: 18px;
+  margin: 18px 0 8px 0;
+}
+.class-choice {
+  background: #222;
+  color: #ffaa00;
+  border: 2px solid #ffaa00;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  font-family: "Ubuntu Mono", monospace;
+  box-shadow: 0 2px 8px #ffaa0033;
+}
+.class-choice.selected, .class-choice:hover, .class-choice:focus {
+  background: #ffaa00;
+  color: #1a1a1a;
+  border-color: #ffaa00;
+  outline: none;
+}
+.class-desc {
+  margin-top: 8px;
+  color: #fffbe6;
+  background: #333;
+  border-left: 3px solid #ffaa00;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 1em;
+}
+.tutorial-progress-bar-outer {
+  width: 100%;
+  background: #222;
+  border-radius: 6px;
+  margin: 16px 0 0 0;
+  height: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #ffaa0033;
+}
+.tutorial-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ffaa00 0%, #ff8c00 100%);
+  transition: width 0.4s;
+}
